@@ -40,7 +40,7 @@ const GoogleMapView = ({ umkmData }) => {
             <div className="font-sans p-1">
                 <h3 className="font-bold text-base mb-1">{selectedUmkm.name}</h3>
                 <p className="text-sm text-gray-600 mb-2">{selectedUmkm.category}</p>
-                <Link href={`/umkm/${selectedUmkm.slug}`} className="text-blue-600 hover:underline font-semibold text-sm">
+                <Link href={`/umkm/${selectedUmkm.slug}`} className="text-green-700 hover:underline font-semibold text-sm">
                   Lihat Detail &rarr;
                 </Link>
             </div>

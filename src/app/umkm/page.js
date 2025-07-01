@@ -9,7 +9,7 @@ const dummyUmkmData = [
     slug: "keripik-bu-yuni",
     category: "Kuliner",
     shortDescription: "Keripik singkong renyah dengan berbagai varian rasa asli dari petani lokal Sumberejo.",
-    imageUrl: "https://via.placeholder.com/300x200?text=Keripik+Singkong",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Warung_in_Garut.JPG",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const dummyUmkmData = [
     slug: "batik-sekar-jagad",
     category: "Kerajinan",
     shortDescription: "Batik tulis khas Gunungkidul dengan motif tradisional yang menawan dan bahan berkualitas.",
-    imageUrl: "https://via.placeholder.com/300x200?text=Batik+Tulis",
+    imageUrl: "https://cdn.antaranews.com/cache/1200x800/2024/08/31/65EBF168-D476-46A5-BC19-19429B6D3998.jpeg",
   },
   {
     id: 3,
@@ -25,23 +25,15 @@ const dummyUmkmData = [
     slug: "gula-aren-pak-jono",
     category: "Agrobisnis",
     shortDescription: "Gula aren asli yang diolah secara tradisional langsung dari nira pohon aren, tanpa bahan pengawet.",
-    imageUrl: "https://via.placeholder.com/300x200?text=Gula+Aren",
-  },
-  {
-    id: 4,
-    name: "Jasa Las Pak Budi",
-    slug: "jasa-las-pak-budi",
-    category: "Jasa",
-    shortDescription: "Menerima pembuatan pagar, kanopi, tralis, dan berbagai kebutuhan konstruksi besi lainnya.",
-    imageUrl: "https://via.placeholder.com/300x200?text=Jasa+Las",
+    imageUrl: "https://static.republika.co.id/uploads/images/xlarge/091622200-1584661374-1280-856.jpg",
   },
   {
     id: 5,
-    name: "Tahu Bakso Merekah",
-    slug: "tahu-bakso-merekah",
+    name: "Tahu Bakso Ibu Pudji",
+    slug: "tahu-bakso-ibu-pudji",
     category: "Kuliner",
     shortDescription: "Tahu bakso lezat dengan isian daging sapi pilihan, cocok untuk camilan keluarga.",
-    imageUrl: "https://via.placeholder.com/300x200?text=Tahu+Bakso",
+    imageUrl: "https://paxelmarket.co/wp-content/uploads/2022/05/WhatsApp-Image-2022-04-17-at-13.12.47.jpeg",
   },
   {
     id: 6,
@@ -49,7 +41,7 @@ const dummyUmkmData = [
     slug: "kerajinan-bambu-mas-agus",
     category: "Kerajinan",
     shortDescription: "Berbagai perabotan dan hiasan rumah unik yang terbuat dari bambu pilihan.",
-    imageUrl: "https://via.placeholder.com/300x200?text=Kerajinan+Bambu",
+    imageUrl: "https://assets.universitas123.com/images/85759/20220620/proses-pembuatan-kerajinan-bambu.jpg",
   },
 ];
 // --- AKHIR DATA DUMMY ---
@@ -76,7 +68,7 @@ const JelajahiUmkmPage = () => {
             <button className="bg-green-700 text-white font-semibold py-3 px-5 rounded-lg hover:bg-green-900 transition-colors">Semua</button>
             <button className="bg-gray-200 text-gray-700 font-semibold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors">Kuliner</button>
             <button className="bg-gray-200 text-gray-700 font-semibold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors">Kerajinan</button>
-            <button className="bg-gray-200 text-gray-700 font-semibold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors">Jasa</button>
+            {/* <button className="bg-gray-200 text-gray-700 font-semibold py-3 px-5 rounded-lg hover:bg-gray-300 transition-colors">Jasa</button> */}
           </div>
         </div>
 

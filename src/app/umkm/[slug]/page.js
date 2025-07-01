@@ -7,7 +7,7 @@ const umkmDetailData = {
   name: "Keripik Singkong Bu Yuni",
   slug: "keripik-bu-yuni",
   category: "Kuliner",
-  bannerUrl: "https://via.placeholder.com/1200x400?text=Warung+Bu+Yuni",
+  bannerUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Warung_in_Garut.JPG",
   description: "Selamat datang di Keripik Singkong Bu Yuni! Kami adalah usaha rumahan yang berdedikasi untuk menyajikan camilan singkong terbaik di Sumberejo. Semua produk kami dibuat dari singkong pilihan dari petani lokal dan diolah dengan resep warisan keluarga, menjamin rasa yang otentik, renyah, dan selalu bikin nagih. Tanpa bahan pengawet dan MSG, camilan kami sehat untuk seluruh keluarga.",
   address: "Jl. Mawar No. 15, Dusun Kenteng, Sumberejo, Semin",
   whatsapp: "6281234567890", // Format internasional tanpa '+'
@@ -17,28 +17,28 @@ const umkmDetailData = {
       name: "Keripik Singkong Original",
       price: "Rp 15.000 / bungkus",
       description: "Rasa asli singkong yang gurih dan renyah, favorit semua orang.",
-      imageUrl: "https://via.placeholder.com/300x300?text=Original"
+      imageUrl: "https://down-id.img.susercontent.com/file/0bfb160dd8672bf2136d6e31377c2c0d"
     },
     {
       id: 2,
       name: "Keripik Singkong Balado",
       price: "Rp 17.000 / bungkus",
       description: "Pedas manis yang pas, dibalut dengan bumbu balado khas rumahan.",
-      imageUrl: "https://via.placeholder.com/300x300?text=Balado"
+      imageUrl: "https://i0.wp.com/www.tokomesin.com/wp-content/uploads/2017/09/singkong-balado-pedas.png?fit=555%2C416&ssl=1"
     },
     {
       id: 3,
       name: "Keripik Singkong Keju",
       price: "Rp 17.000 / bungkus",
       description: "Gurihnya keju premium yang melimpah, disukai anak-anak.",
-      imageUrl: "https://via.placeholder.com/300x300?text=Keju"
+      imageUrl: "https://www.tokomesin.com/wp-content/uploads/2017/10/Keripik-singkong-keju.jpg"
     },
     {
         id: 4,
         name: "Keripik Singkong Jagung Bakar",
         price: "Rp 17.000 / bungkus",
         description: "Aroma jagung bakar yang khas, cocok untuk teman nonton.",
-        imageUrl: "https://via.placeholder.com/300x300?text=Jagung+Bakar"
+        imageUrl: "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2023/11/10/1a51fd99-6d1f-4fb3-9000-7824349722d0.jpg"
       }
   ]
 };
@@ -53,7 +53,7 @@ const UmkmDetailPage = ({ params }) => {
       {/* Bagian Banner */}
       <div className="relative h-64 md:h-80">
         <img src={umkm.bannerUrl} alt={`Banner ${umkm.name}`} className="w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-green-700 bg-opacity-50 flex items-center justify-center">
+        <div className="absolute inset-0 0 bg-opacity-50 flex items-center justify-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white text-center px-4">{umkm.name}</h1>
         </div>
       </div>
@@ -90,7 +90,7 @@ const UmkmDetailPage = ({ params }) => {
                     href={`https://wa.me/${umkm.whatsapp}`} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
+                    className="text-green-700 hover:underline"
                   >
                     Hubungi via WhatsApp
                   </a>
