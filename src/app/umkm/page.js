@@ -49,7 +49,7 @@ const dummyUmkmData = [
 
 const JelajahiUmkmPage = () => {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-amber-50 min-h-screen">
       <div className="container mx-auto px-6 py-12">
         {/* Header dan Judul */}
         <div className="text-center mb-12">

@@ -26,7 +26,7 @@ const categories = [
 
 const KategoriUmkm = () => {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-amber-50">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
           Jelajahi Berdasarkan Kategori

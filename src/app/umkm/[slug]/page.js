@@ -53,12 +53,12 @@ const UmkmDetailPage = ({ params }) => {
       {/* Bagian Banner */}
       <div className="relative h-64 md:h-80">
         <img src={umkm.bannerUrl} alt={`Banner ${umkm.name}`} className="w-full h-full object-cover"/>
-        <div className="absolute inset-0 0 bg-opacity-50 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white text-center px-4">{umkm.name}</h1>
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-6 py-12 bg-amber-50">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
           {/* Kolom Kiri: Katalog Produk */}
