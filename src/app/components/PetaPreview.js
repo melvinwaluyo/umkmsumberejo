@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const PetaPreview = () => {
   return (
-    <section className="bg-gray-800 text-white">
+    <section className="bg-amber-950 text-white">
       <div className="container mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
         {/* Kolom Teks */}
         <div>
@@ -11,7 +11,7 @@ const PetaPreview = () => {
             Lihat sebaran lokasi UMKM di seluruh Kelurahan Sumberejo melalui peta interaktif kami. Temukan UMKM terdekat dari lokasi Anda dengan mudah.
           </p>
           <Link href="/pemetaan">
-            <span className="bg-green-700 text-white font-bold py-3 px-8 rounded-full hover:bg-green-900 transition duration-300">
+            <span className="bg-yellow-800 text-white font-bold py-3 px-8 rounded-full hover:bg-green-900 transition duration-300">
               Lihat Peta Lengkap
             </span>
           </Link>

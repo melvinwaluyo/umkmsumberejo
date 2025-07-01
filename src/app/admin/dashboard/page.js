@@ -14,7 +14,7 @@ const AdminDashboardPage = () => {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
         <Link href="/">
-            <span className="text-sm text-blue-600 hover:underline">← Kembali ke Situs Utama</span>
+            <span className="text-sm text-green-700 hover:underline">← Kembali ke Situs Utama</span>
         </Link>
       </div>
       

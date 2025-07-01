@@ -11,7 +11,7 @@ const Hero = () => {
         <div className="mt-8">
           <a
             href="#featured"
-            className="bg-white text-green-700 font-bold py-3 px-6 rounded-full hover:bg-gray-200 transition duration-300"
+            className="bg-amber-50 text-green-700 font-bold py-3 px-6 rounded-full hover:bg-gray-200 transition duration-300"
           >
             Lihat UMKM Unggulan
           </a>

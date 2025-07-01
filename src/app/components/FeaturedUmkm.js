@@ -7,27 +7,27 @@ const umkmData = [
     name: "Keripik Singkong Bu Yuni",
     slug: "keripik-bu-yuni",
     description: "Keripik singkong renyah dengan berbagai varian rasa asli dari petani lokal.",
-    image: "https://via.placeholder.com/300x200?text=Produk+UMKM+1",
+    image: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Warung_in_Garut.JPG",
   },
   {
     id: 2,
     name: "Batik Tulis Sekar Jagad",
     slug: "batik-sekar-jagad",
     description: "Batik tulis khas Gunungkidul dengan motif tradisional yang menawan.",
-    image: "https://via.placeholder.com/300x200?text=Produk+UMKM+2",
+    image: "https://cdn.antaranews.com/cache/1200x800/2024/08/31/65EBF168-D476-46A5-BC19-19429B6D3998.jpeg",
   },
   {
     id: 3,
     name: "Gula Aren Murni Pak Jono",
     slug: "gula-aren-pak-jono",
     description: "Gula aren asli yang diolah secara tradisional, tanpa bahan pengawet.",
-    image: "https://via.placeholder.com/300x200?text=Produk+UMKM+3",
+    image: "https://static.republika.co.id/uploads/images/xlarge/091622200-1584661374-1280-856.jpg",
   },
 ];
 
 const FeaturedUmkm = () => {
   return (
-    <section id="featured" className="py-20 bg-gray-50">
+    <section id="featured" className="py-20 bg-amber-50">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
           UMKM Unggulan

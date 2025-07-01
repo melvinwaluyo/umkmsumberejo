@@ -27,7 +27,7 @@ const GoogleMapView = ({ umkmData }) => {
             position={{ lat: umkm.coordinates[0], lng: umkm.coordinates[1] }}
             onClick={() => setSelectedUmkm(umkm)}
           >
-            <Pin background={'#1a73e8'} glyphColor={'#fff'} borderColor={'#1a73e8'} />
+            <Pin background={'#21492a'} glyphColor={'#fff'} borderColor={'#21492a'} />
           </AdvancedMarker>
         ))}
 
@@ -38,9 +38,9 @@ const GoogleMapView = ({ umkmData }) => {
             onCloseClick={() => setSelectedUmkm(null)}
           >
             <div className="font-sans p-1">
-                <h3 className="font-bold text-base mb-1">{selectedUmkm.name}</h3>
+                <h3 className="font-bold text-black text-base mb-1">{selectedUmkm.name}</h3>
                 <p className="text-sm text-gray-600 mb-2">{selectedUmkm.category}</p>
-                <Link href={`/umkm/${selectedUmkm.slug}`} className="text-blue-600 hover:underline font-semibold text-sm">
+                <Link href={`/umkm/${selectedUmkm.slug}`} className="text-green-700 hover:underline font-semibold text-sm">
                   Lihat Detail &rarr;
                 </Link>
             </div>
