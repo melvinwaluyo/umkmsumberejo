@@ -6,10 +6,46 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+// Model untuk data UMKM
+model Umkm {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  slug        String    @unique
+  category    String
+  description String
+  address     String
+  whatsapp    String
+  bannerUrl   String
+  latitude    Float
+  longitude   Float
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+// Model untuk produk yang dijual oleh UMKM
+model Product {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  price       String
+  description String
+  imageUrl    String
+  createdAt   DateTime @default(now())
+  umkm        Umkm     @relation(fields: [umkmId], references: [id])
+  umkmId      String   @db.ObjectId
+}
+
+// --- MODELs UNTUK ADMIN ---
+model Admin {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique // Email untuk login, harus unik
+  password  String   // Hash password akan disimpan di sini
+  createdAt DateTime @default(now())
 }
