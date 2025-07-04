@@ -12,6 +12,12 @@ const cardo = Cardo({
 export const metadata = {
   title: "UMKM Sumberejo",
   description: "Website pemetaan dan katalog produk UMKM Kelurahan Sumberejo, Semin, Gunungkidul",
+  manifest: "/site.webmanifest", // <-- Tambahkan link ke manifest
+  icons: {
+    icon: "/favicon.ico", // <-- Link ke favicon utama
+    apple: "/apple-touch-icon.png", // <-- Link untuk perangkat Apple
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
