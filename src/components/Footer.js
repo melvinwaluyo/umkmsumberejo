@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AdminFooterLink from "./AdminFooterLink";
 
 const Footer = () => {
     return (
@@ -10,11 +11,7 @@ const Footer = () => {
           </p>
           {/* --- TAUTAN LOGIN ADMIN DI SINI --- */}
           <div className="mt-4">
-            <Link href="/admin/login">
-              <span className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
-                Admin Login
-              </span>
-            </Link>
+            <AdminFooterLink />
           </div>
         </div>
       </footer>

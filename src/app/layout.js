@@ -2,6 +2,7 @@ import { Cardo } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import AuthProvider from "@/components/AuthProvider";
 
 const cardo = Cardo({
   variable: "--font-cardo",
@@ -22,16 +23,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${cardo.variable} antialiased`} >
-        <Navbar />
-
-        <main>
-          {children}
-        </main>
-
-        <Footer />
+    <html lang="id">
+      <body className={`${cardo.variable} antialiased`}>
+        <AuthProvider> 
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

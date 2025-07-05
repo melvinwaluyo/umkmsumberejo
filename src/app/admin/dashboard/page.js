@@ -1,8 +1,11 @@
-import Link from 'next/link';
-import { FaPlus, FaUsers, FaBoxOpen, FaMapMarkedAlt } from 'react-icons/fa';
+"use client"; // Jadikan Client Component untuk interaktivitas
 
-const AdminDashboardPage = () => {
-  // Data dummy untuk ringkasan
+import Link from 'next/link';
+import { signOut } from 'next-auth/react'; // Impor fungsi signOut
+import { FaPlus, FaUsers, FaBoxOpen, FaMapMarkedAlt, FaSignOutAlt } from 'react-icons/fa';
+
+export default function AdminDashboardPage() {
+  // Data dummy untuk ringkasan (bisa diganti dengan data asli nanti)
   const summaryData = {
     totalUmkm: 6,
     totalProducts: 25,
@@ -11,11 +14,20 @@ const AdminDashboardPage = () => {
 
   return (
     <div className="container mx-auto px-6 py-8">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-8 flex-wrap gap-4">
         <h1 className="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
-        <Link href="/">
-            <span className="text-sm text-green-700 hover:underline">← Kembali ke Situs Utama</span>
-        </Link>
+        <div className="flex items-center gap-6">
+            <Link href="/" className="text-sm text-blue-600 hover:underline">
+                ← Kembali ke Situs Utama
+            </Link>
+            {/* Tombol Logout */}
+            <button
+                onClick={() => signOut({ callbackUrl: '/' })} // Panggil signOut saat diklik
+                className="flex items-center gap-2 text-sm text-red-600 hover:underline cursor-pointer"
+            >
+                <FaSignOutAlt /> Logout
+            </button>
+        </div>
       </div>
       
       {/* Bagian Ringkasan */}
@@ -64,5 +76,3 @@ const AdminDashboardPage = () => {
     </div>
   );
 };
-
-export default AdminDashboardPage;

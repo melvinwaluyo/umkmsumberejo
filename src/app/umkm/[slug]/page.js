@@ -56,7 +56,7 @@ export default async function UmkmDetailPage({ params }) {
           <div className="lg:col-span-1">
             <div className="bg-white p-6 rounded-lg shadow-md border sticky top-28">
               <h3 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-3 flex items-center gap-3">
-                <FaInfoCircle className="text-blue-500" /> Tentang Kami
+                <FaInfoCircle className="text-green-500" /> Tentang Kami
               </h3>
               <p className="text-gray-600 mb-6">{umkm.description}</p>
               
@@ -71,7 +71,7 @@ export default async function UmkmDetailPage({ params }) {
                     href={`https://wa.me/${umkm.whatsapp}`} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
+                    className="text-green-600 hover:underline"
                   >
                     Hubungi via WhatsApp
                   </a>
