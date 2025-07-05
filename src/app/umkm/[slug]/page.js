@@ -1,4 +1,4 @@
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../../components/ProductCard';
 import { FaMapMarkerAlt, FaWhatsapp, FaInfoCircle } from 'react-icons/fa';
 import { notFound } from 'next/navigation';
 

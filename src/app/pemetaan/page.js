@@ -1,4 +1,4 @@
-import PetaLoader from '../components/PetaLoader'; // Impor komponen baru
+import PetaLoader from '../../components/PetaLoader'; // Impor komponen baru
 
 // Fungsi untuk mengambil data UMKM (tetap sama)
 async function getUmkmData() {

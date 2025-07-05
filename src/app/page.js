@@ -1,7 +1,7 @@
-import Hero from './components/Hero';
-import FeaturedUmkm from './components/FeaturedUmkm';
-import KategoriUmkm from './components/KategoriUmkm';
-import PetaPreview from './components/PetaPreview';
+import Hero from '../components/Hero';
+import FeaturedUmkm from '../components/FeaturedUmkm';
+import KategoriUmkm from '../components/KategoriUmkm';
+import PetaPreview from '../components/PetaPreview';
 
 
 export default function Home() {

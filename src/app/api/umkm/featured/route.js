@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import db from '../../../lib/db'; // Sesuaikan path relatif
+import db from '../../../../lib/db'; // Sesuaikan path relatif
 
 /**
  * Mengambil 3 data UMKM yang terakhir di-update.

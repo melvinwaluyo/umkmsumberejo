@@ -1,4 +1,4 @@
-import UmkmCard from '../components/UmkmCard';
+import UmkmCard from '../../components/UmkmCard';
 
 // Fungsi untuk mengambil data UMKM dari API Anda
 async function getUmkmData() {
