@@ -6,7 +6,7 @@ import db from '../../../../lib/db';
  */
 export async function GET(request, context) {
   try {
-    const { slug } = context.params;
+    const { slug } = await context.params;
 
     const umkm = await db.umkm.findUnique({
       where: { slug },

@@ -22,7 +22,8 @@ async function getUmkmDetail(slug) {
 
 
 export default async function UmkmDetailPage({ params }) {
-  const umkm = await getUmkmDetail(params.slug);
+  const { slug } = await params;
+  const umkm = await getUmkmDetail(slug);
 
   return (
     <div>

@@ -8,7 +8,7 @@ import db from '../../../../lib/db';
 export async function POST(request, context) {
   try {
     // 1. Ambil umkmId dari parameter URL
-    const { umkmId } = context.params;
+    const { umkmId } = await context.params;
 
     // 2. Ambil data produk dari body request
     const data = await request.json();
