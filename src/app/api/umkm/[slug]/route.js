@@ -1,16 +1,19 @@
 import { NextResponse } from 'next/server';
-import db from '../../../../lib/db';
+import db from '@/lib/db'; // Pastikan path ini benar
+
 /**
+ * Mengambil satu data UMKM berdasarkan SLUG-nya
  * @param {Request} request
  * @param {{ params: { slug: string } }} context
  */
 export async function GET(request, context) {
   try {
-    const { slug } = await context.params;
+    const { slug } = context.params;
 
+    // Cari UMKM berdasarkan field 'slug' yang unik
     const umkm = await db.umkm.findUnique({
       where: { slug },
-      // Sertakan juga data produk yang terhubung dengan UMKM ini
+      // Sertakan juga semua produk yang terhubung
       include: {
         products: true,
       },
@@ -26,7 +29,7 @@ export async function GET(request, context) {
     return NextResponse.json(umkm);
 
   } catch (error) {
-    console.error("Gagal mengambil data UMKM:", error);
+    console.error("Gagal mengambil data UMKM by slug:", error);
     return NextResponse.json(
       { message: "Terjadi kesalahan pada server.", error: error.message },
       { status: 500 }

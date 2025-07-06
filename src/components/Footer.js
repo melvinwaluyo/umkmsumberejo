@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import AdminFooterLink from "./AdminFooterLink";
+import AdminFooterLink from "./admin/AdminFooterLink";
 
 const Footer = () => {
     return (
