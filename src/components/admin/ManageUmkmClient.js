@@ -16,7 +16,7 @@ export default function ManageUmkmClient({ initialUmkm }) {
         <div className="container mx-auto px-6 py-8 bg-gray-50 min-h-screen">
             {/* Header Halaman */}
             <div className="mb-8">
-                <Link href="/admin/dashboard" className="text-blue-600 hover:underline flex items-center gap-2 mb-4">
+                <Link href="/admin/dashboard" className="text-green-600 hover:underline flex items-center gap-2 mb-4">
                     <FaArrowLeft /> Kembali ke Dashboard
                 </Link>
                 {/* Banner UMKM */}
@@ -40,7 +40,7 @@ export default function ManageUmkmClient({ initialUmkm }) {
                 <p className="text-gray-700 mb-6">{umkm.description}</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 border-t pt-4">
                     <div><strong>Alamat:</strong> {umkm.address}</div>
-                    <div><strong>WhatsApp:</strong> <a href={`https://wa.me/${umkm.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{umkm.whatsapp}</a></div>
+                    <div><strong>WhatsApp:</strong> <a href={`https://wa.me/${umkm.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline">{umkm.whatsapp}</a></div>
                     <div><strong>Latitude:</strong> {umkm.latitude}</div>
                     <div><strong>Longitude:</strong> {umkm.longitude}</div>
                 </div>
@@ -53,7 +53,7 @@ export default function ManageUmkmClient({ initialUmkm }) {
             <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-bold text-gray-800">Katalog Produk</h2>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                    <button className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors">
                         <FaPlus /> Tambah Produk Baru
                     </button>
                 </div>

@@ -4,13 +4,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**.wordpress.com', // Mengizinkan semua subdomain wordpress.com
+        hostname: 'res.cloudinary.com', // Mengizinkan semua subdomain cloudinary.com
       },
-      {
-        protocol: 'https',
-        hostname: 'creatorspace.imgix.net', // Mengizinkan semua subdomain imgix.net
-      },
-
     ],
   },
 };

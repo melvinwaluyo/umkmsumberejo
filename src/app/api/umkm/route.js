@@ -43,7 +43,7 @@ export async function POST(request) {
     // 2. Validasi data yang masuk (contoh sederhana)
     const { 
       name, category, description, address, 
-      whatsapp, bannerUrl, latitude, longitude 
+      whatsapp, bannerUrl, bannerPublicId, latitude, longitude 
     } = data;
 
     if (!name || !category || !description || !address || !whatsapp || !latitude || !longitude) {
@@ -77,7 +77,8 @@ export async function POST(request) {
         description,
         address,
         whatsapp,
-        bannerUrl: bannerUrl || "", // Beri nilai default jika bannerUrl tidak ada
+        bannerUrl: bannerUrl || "",
+        bannerPublicId: bannerPublicId || null,
         latitude: parseFloat(latitude), // Pastikan tipe data adalah angka
         longitude: parseFloat(longitude),
       },

@@ -24,7 +24,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
-      <body className={`${cardo.variable} antialiased`}>
+      <body className={`${cardo.variable} antialiased bg-amber-50`}>
         <AuthProvider> 
           <Navbar />
           <main>{children}</main>

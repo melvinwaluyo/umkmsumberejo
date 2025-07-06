@@ -23,6 +23,7 @@ model Umkm {
   address     String
   whatsapp    String
   bannerUrl   String
+  bannerPublicId String? 
   latitude    Float
   longitude   Float
   createdAt   DateTime  @default(now())

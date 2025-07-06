@@ -1,54 +1,61 @@
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
-/**
- * @param {Request} request
- * @param {{ params: { slug: string } }} context
- */
-export async function GET(request, context) {
-  try {
-    const { id } = await context.params;
+import { v2 as cloudinary } from 'cloudinary';
 
-    const umkm = await db.umkm.findUnique({
-      where: { id },
-      // Sertakan juga data produk yang terhubung dengan UMKM ini
-      include: {
-        products: true,
-      },
-    });
+// Konfigurasi Cloudinary (wajib ada di sini juga)
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-    if (!umkm) {
-      return NextResponse.json(
-        { message: "UMKM tidak ditemukan" },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json(umkm);
-
-  } catch (error) {
-    console.error("Gagal mengambil data UMKM:", error);
-    return NextResponse.json(
-      { message: "Terjadi kesalahan pada server.", error: error.message },
-      { status: 500 }
-    );
-  }
-}
 
 export async function DELETE(request, { params }) {
   try {
-    const { id } = params;
+    // --- PERBAIKAN 1: Await params ---
+    const { id } = await params;
 
-    // Hapus dulu semua produk yang terhubung dengan UMKM ini
+    // 1. Cari data UMKM terlebih dahulu untuk mendapatkan public_id
+    const umkmToDelete = await db.umkm.findUnique({
+      where: { id },
+    });
+
+    if (!umkmToDelete) {
+      return NextResponse.json({ message: "UMKM tidak ditemukan" }, { status: 404 });
+    }
+
+    // 2. Hapus gambar di Cloudinary jika public_id ada
+    if (umkmToDelete.bannerPublicId) {
+      console.log(`Mencoba menghapus gambar dengan public_id: ${umkmToDelete.bannerPublicId}`);
+      try {
+        // --- PERBAIKAN 2: Logika Penghapusan Cloudinary ---
+        const deleteResult = await cloudinary.uploader.destroy(umkmToDelete.bannerPublicId);
+        
+        // Log hasil dari Cloudinary untuk debugging
+        console.log("Hasil penghapusan Cloudinary:", deleteResult);
+
+        if (deleteResult.result !== 'ok') {
+            // Jika hasilnya bukan 'ok', catat sebagai peringatan tapi jangan hentikan proses
+            console.warn(`Peringatan: Gagal menghapus gambar di Cloudinary, respons: ${deleteResult.result}`);
+        }
+
+      } catch (cloudinaryError) {
+        console.error("Error saat menghubungi API Cloudinary:", cloudinaryError);
+      }
+    }
+
+    // 3. Hapus dulu semua produk yang terhubung dengan UMKM ini
     await db.product.deleteMany({
       where: { umkmId: id },
     });
 
-    // Baru hapus UMKM-nya
+    // 4. Baru hapus UMKM-nya dari database
     await db.umkm.delete({
       where: { id },
     });
 
-    return new NextResponse(null, { status: 204 }); // 204 No Content
+    // Berhasil
+    return new NextResponse(null, { status: 204 }); 
 
   } catch (error) {
     console.error("Gagal menghapus UMKM:", error);
