@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AuthProvider from "@/components/AuthProvider";
+import { Toaster } from "react-hot-toast";
 
 const cardo = Cardo({
   variable: "--font-cardo",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
     <html lang="id">
       <body className={`${cardo.variable} antialiased bg-amber-50`}>
         <AuthProvider> 
+          <Toaster position="top-center" reverseOrder={false} /> {/* <-- 2. Tambahkan Toaster di sini */}
           <Navbar />
           <main>{children}</main>
           <Footer />
