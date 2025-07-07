@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation'; // Impor useRouter
 import { FaPlus, FaUsers, FaBoxOpen, FaEdit, FaTrash, FaSignOutAlt } from 'react-icons/fa';
 import { signOut } from 'next-auth/react';
-import AddUmkmModal from "./AddUmkmModal";
+import AddUmkmModal from "./UmkmModal";
 
 export default function DashboardClient({ initialUmkmData, summaryData }) {
   const [umkmList, setUmkmList] = useState(initialUmkmData || []);

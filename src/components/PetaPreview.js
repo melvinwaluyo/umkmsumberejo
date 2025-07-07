@@ -21,7 +21,7 @@ const PetaPreview = () => {
         <div className="relative w-full h-full rounded-lg shadow-2xl overflow-hidden">
           {/* Ganti 'src' dengan screenshot peta Anda jika sudah ada */}
           <img 
-            src="TestPeta.jpg" 
+            src="/TestPeta.jpg" 
             alt="Preview Peta UMKM Sumberejo" 
             className="w-full h-full object-cover"
           />

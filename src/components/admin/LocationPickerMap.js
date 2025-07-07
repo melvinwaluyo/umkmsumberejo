@@ -1,36 +1,46 @@
 "use client";
 
 import { APIProvider, Map, AdvancedMarker, useMap } from '@vis.gl/react-google-maps';
-import { useState, useEffect, useCallback } from 'react';
-import PlacesAutocomplete from './PlacesAutocomplete'; // Impor komponen baru
+import { useState, useEffect } from 'react';
+import PlacesAutocomplete from './PlacesAutocomplete';
 
 // Komponen peta utama
 function InteractiveMap({ onLocationSelect, externalLat, externalLng }) {
     const map = useMap();
     const defaultPosition = { lat: -7.9254, lng: 110.6534 };
+
+    // State internal untuk posisi marker, dimulai dari null
     const [markerPos, setMarkerPos] = useState(null);
 
-    // Efek untuk meng-update pin dari input manual
+    // useEffect ini HANYA bereaksi terhadap perubahan dari input manual (props)
     useEffect(() => {
-        if (externalLat && externalLng) {
+        // Jika ada koordinat dari luar (form) dan map sudah siap
+        if (externalLat && externalLng && map) {
             const newPos = { lat: parseFloat(externalLat), lng: parseFloat(externalLng) };
-            if (markerPos?.lat !== newPos.lat || markerPos?.lng !== newPos.lng) {
-                setMarkerPos(newPos);
-                if(map) map.panTo(newPos);
-            }
+            setMarkerPos(newPos); // Set posisi pin
+            map.panTo(newPos);   // Pindahkan tampilan peta ke lokasi pin
         }
-    }, [externalLat, externalLng, map, markerPos]);
+    }, [externalLat, externalLng, map]); // <-- Hapus 'markerPos' dari dependency
 
-    // Handler saat peta diklik
+    // Efek ini HANYA berjalan sekali saat peta pertama kali dimuat
+    useEffect(() => {
+        if (map && externalLat && externalLng) {
+             // Langsung pusatkan peta ke lokasi awal saat mode edit
+            map.panTo({ lat: parseFloat(externalLat), lng: parseFloat(externalLng) });
+        }
+    }, [map]); // <-- Hanya bergantung pada map
+
+    // Handler saat peta diklik (ini sekarang tidak akan terganggu oleh useEffect)
     const handleMapClick = (event) => {
         const lat = event.detail.latLng.lat;
         const lng = event.detail.latLng.lng;
-        setMarkerPos({ lat, lng });
+        const newPos = { lat, lng };
+        setMarkerPos(newPos);
         onLocationSelect(lat, lng);
     };
 
     // Handler saat lokasi dipilih dari search box
-    const handlePlaceSelect = useCallback((place) => {
+    const handlePlaceSelect = (place) => {
         if (!place.geometry) return;
         
         const lat = place.geometry.location.lat();
@@ -43,13 +53,11 @@ function InteractiveMap({ onLocationSelect, externalLat, externalLng }) {
             map.panTo(newPos);
             map.setZoom(15);
         }
-    }, [map, onLocationSelect]);
+    };
 
     return (
         <div className="relative w-full h-full">
-            {/* Tempatkan Search Box di atas peta */}
             <PlacesAutocomplete onPlaceSelect={handlePlaceSelect} />
-            
             <Map
                 defaultCenter={defaultPosition}
                 defaultZoom={13}
@@ -65,7 +73,7 @@ function InteractiveMap({ onLocationSelect, externalLat, externalLng }) {
     );
 }
 
-// Wrapper untuk menyediakan API Key
+// Wrapper untuk menyediakan API Key (tidak ada perubahan di sini)
 export default function LocationPickerMap({ onLocationSelect, latitude, longitude }) {
     return (
         <APIProvider apiKey={process.env.NEXT_PUBLIC_Maps_API_KEY} libraries={['places']}>
