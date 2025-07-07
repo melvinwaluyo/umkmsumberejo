@@ -127,7 +127,6 @@ export default function UmkmModal({ isOpen, onClose, onFormSubmit, initialData =
 
   if (!isOpen) return null;
 
-  // --- JSX / TAMPILAN MODAL ---
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/50 p-4">
       <div className="bg-white p-8 rounded-lg shadow-2xl w-full max-w-3xl max-h-[95vh] overflow-y-auto">
@@ -144,7 +143,17 @@ export default function UmkmModal({ isOpen, onClose, onFormSubmit, initialData =
           {/* Inputs di-binding dengan 'value' dari formData */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <input name="name" value={formData.name || ''} onChange={handleInputChange} placeholder="Nama UMKM" required className="w-full p-3 border rounded text-gray-700 focus:ring-2 focus:ring-green-500" />
-            <input name="category" value={formData.category || ''} onChange={handleInputChange} placeholder="Kategori" required className="w-full p-3 border rounded text-gray-700 focus:ring-2 focus:ring-green-500" />
+            <select
+              name="category"
+              value={formData.category || 'Kuliner'}
+              onChange={handleInputChange}
+              required
+              className="w-full p-3 border rounded text-gray-700 focus:ring-2 focus:ring-green-500 bg-white"
+            >
+              <option value="Kuliner">Kuliner</option>
+              <option value="Kerajinan">Kerajinan</option>
+              {/*  Bisa tambah kategori lain di sini nanti */}
+            </select>
           </div>
           <textarea name="description" value={formData.description || ''} onChange={handleInputChange} placeholder="Deskripsi Lengkap UMKM" required rows="4" className="w-full p-3 border rounded text-gray-700 focus:ring-2 focus:ring-green-500"></textarea>
           <input name="address" value={formData.address || ''} onChange={handleInputChange} placeholder="Alamat" required className="w-full p-3 border rounded text-gray-700 focus:ring-2 focus:ring-green-500" />
