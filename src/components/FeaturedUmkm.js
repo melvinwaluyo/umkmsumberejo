@@ -1,3 +1,5 @@
+import UmkmCard from './UmkmCard'; // Impor komponen UmkmCard
+
 // Fungsi untuk mengambil data dari API
 async function getFeaturedUmkmData() {
   try {
@@ -20,14 +22,6 @@ async function getFeaturedUmkmData() {
 export default async function FeaturedUmkm() {
   const umkmData = await getFeaturedUmkmData();
 
-  // Fungsi untuk memotong deskripsi jika terlalu panjang
-  const truncateDescription = (text, maxLength) => {
-    if (!text || text.length <= maxLength) {
-      return text;
-    }
-    return text.substring(0, maxLength) + '...';
-  };
-
   return (
     <section id="featured" className="py-20 bg-amber-50">
       <div className="container mx-auto px-6">
@@ -35,28 +29,14 @@ export default async function FeaturedUmkm() {
           UMKM Unggulan
         </h2>
         <p className="text-center text-gray-600 mb-12">
-          Berikut adalah beberapa UMKM yang menjadi unggulan di Kelurahan Sumberejo.
+          Berikut adalah beberapa UMKM yang menjadi primadona di Kelurahan Sumberejo.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {umkmData && umkmData.length > 0 ? (
+            // Gunakan komponen UmkmCard di sini
             umkmData.map((umkm) => (
-              <div key={umkm.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img 
-                  src={umkm.bannerUrl || "https://via.placeholder.com/300x200?text=Produk+UMKM"} 
-                  alt={umkm.name} 
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{umkm.name}</h3>
-                  <p className="text-gray-600 h-20">
-                    {truncateDescription(umkm.description, 120)}
-                  </p>
-                  <a href={`/umkm/${umkm.slug}`} className="inline-block mt-4 text-green-700 hover:text-green-900 font-semibold">
-                    Lihat Detail →
-                  </a>
-                </div>
-              </div>
+              <UmkmCard key={umkm.id} umkm={umkm} />
             ))
           ) : (
             <p className="col-span-full text-center text-gray-500">Data UMKM unggulan tidak tersedia.</p>

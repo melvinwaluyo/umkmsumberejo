@@ -1,4 +1,5 @@
-import ProductCard from '../../../components/ProductCard';
+import ProductCard from '@/components/ProductCard';
+import Breadcrumb from "@/components/Breadcrumb";
 import { FaMapMarkerAlt, FaWhatsapp, FaInfoCircle } from 'react-icons/fa';
 import { notFound } from 'next/navigation';
 
@@ -25,6 +26,12 @@ export default async function UmkmDetailPage({ params }) {
   const { slug } = await params;
   const umkm = await getUmkmDetail(slug);
 
+  const breadcrumbCrumbs = [
+    { href: '/', label: 'Home' },
+    { href: '/umkm', label: 'Jelajahi UMKM' },
+    { href: `/umkm/${umkm.slug}`, label: umkm.name }
+  ];
+
   return (
     <div>
       {/* Bagian Banner */}
@@ -36,6 +43,7 @@ export default async function UmkmDetailPage({ params }) {
       </div>
 
       <div className="container mx-auto px-6 py-12 bg-amber-50">
+        <Breadcrumb crumbs={breadcrumbCrumbs} />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
           {/* Kolom Kiri: Katalog Produk */}
