@@ -6,9 +6,10 @@ import db from '@/lib/db'; // Pastikan path ini benar
  * @param {Request} request
  * @param {{ params: { slug: string } }} context
  */
-export async function GET(request, context) {
+export async function GET(request, { params }) {
   try {
-    const { slug } = context.params;
+    
+    const { slug } = await params;
 
     // Cari UMKM berdasarkan field 'slug' yang unik
     const umkm = await db.umkm.findUnique({

@@ -5,12 +5,12 @@ const categories = [
   {
     name: 'Kuliner',
     icon: <FaUtensils className="w-12 h-12 text-blue-500" />,
-    href: '/umkm?kategori=kuliner',
+    href: '/umkm?kategori=Kuliner',
   },
   {
     name: 'Kerajinan',
     icon: <FaPalette className="w-12 h-12 text-green-500" />,
-    href: '/umkm?kategori=kerajinan',
+    href: '/umkm?kategori=Kerajinan',
   },
   // {
   //   name: 'Jasa',

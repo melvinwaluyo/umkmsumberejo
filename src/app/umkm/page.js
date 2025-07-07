@@ -1,50 +1,73 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import UmkmCard from '../../components/UmkmCard';
-import useDebounce from '../../hooks/useDebounce'; // Impor custom hook
+import { useState, useEffect } from 'react';
+// 1. Impor hooks yang diperlukan untuk navigasi dan parameter URL
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import UmkmCard from '@/components/UmkmCard';
+import useDebounce from '@/hooks/useDebounce';
 
-export default function JelajahiUmkmPage() {
+// Komponen utama dipisahkan agar bisa menggunakan hooks
+function JelajahiUmkmComponent() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // 2. Inisialisasi state langsung dari parameter URL saat halaman dimuat
+  const [searchTerm, setSearchTerm] = useState(() => searchParams.get('q') || '');
+  const [activeCategory, setActiveCategory] = useState(() => searchParams.get('kategori') || 'Semua');
+  
   const [umkmData, setUmkmData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [activeCategory, setActiveCategory] = useState('Semua');
 
-  // Gunakan debounce untuk search term
-  const debouncedSearchTerm = useDebounce(searchTerm, 500); // Tunda 500ms
+  // Gunakan debounce agar tidak memanggil API setiap kali mengetik
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  // Fungsi untuk mengambil data berdasarkan state saat ini
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams();
-      if (debouncedSearchTerm) {
-        params.append('q', debouncedSearchTerm);
-      }
-      if (activeCategory && activeCategory !== 'Semua') {
-        params.append('category', activeCategory);
-      }
-      
-      const res = await fetch(`/api/umkm?${params.toString()}`);
-      if (!res.ok) {
-        throw new Error('Gagal mengambil data dari server');
-      }
-      const data = await res.json();
-      setUmkmData(data);
-    } catch (error) {
-      console.error("Terjadi error saat fetch:", error);
-      setUmkmData([]); // Kosongkan data jika error
-    } finally {
-      setLoading(false);
-    }
-  }, [debouncedSearchTerm, activeCategory]); // Dependency: panggil ulang jika search term atau kategori berubah
-
-  // useEffect untuk memanggil fetchData saat dependency berubah
+  // 3. useEffect ini sekarang menangani pembaruan URL dan pengambilan data
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    // Siapkan parameter untuk API backend
+    const apiParams = new URLSearchParams();
+    // Siapkan parameter untuk URL di browser
+    const urlParams = new URLSearchParams();
 
-  const categories = ['Semua', 'Kuliner', 'Kerajinan']; // Definisikan kategori
+    // Tambahkan parameter pencarian jika ada
+    if (debouncedSearchTerm) {
+      apiParams.set('q', debouncedSearchTerm);
+      urlParams.set('q', debouncedSearchTerm);
+    }
+
+    // Tambahkan parameter kategori jika bukan 'Semua'
+    if (activeCategory && activeCategory !== 'Semua') {
+      apiParams.set('category', activeCategory); // 'category' untuk API
+      urlParams.set('kategori', activeCategory); // 'kategori' untuk URL browser
+    }
+
+    // 4. Update URL browser tanpa me-reload halaman
+    // router.replace() lebih baik dari router.push() untuk filter
+    router.replace(`${pathname}?${urlParams.toString()}`);
+
+    // 5. Ambil data dari API dengan parameter yang sesuai
+    setLoading(true);
+    fetch(`/api/umkm?${apiParams.toString()}`)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Gagal mengambil data dari server');
+        }
+        return res.json();
+      })
+      .then(data => {
+        setUmkmData(data);
+      })
+      .catch(error => {
+        console.error("Terjadi error saat fetch:", error);
+        setUmkmData([]);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+      
+  }, [debouncedSearchTerm, activeCategory, pathname, router]); // Jalankan efek ini jika filter berubah
+
+  const categories = ['Semua', 'Kuliner', 'Kerajinan'];
 
   return (
     <div className="bg-amber-50 min-h-screen">
@@ -97,4 +120,9 @@ export default function JelajahiUmkmPage() {
       </div>
     </div>
   );
-};
+}
+
+// Wrapper untuk memastikan hooks bisa digunakan (best practice)
+export default function JelajahiUmkmPage() {
+    return <JelajahiUmkmComponent />;
+}
