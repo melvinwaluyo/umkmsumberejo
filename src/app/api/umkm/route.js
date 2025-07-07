@@ -7,13 +7,35 @@ import db from '@/lib/db';
  */
 export async function GET(request) {
   try {
+    // Ambil parameter dari URL
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get('q');
+    const category = searchParams.get('category');
+
+    // Bangun klausa 'where' secara dinamis untuk query Prisma
+    const whereClause = {};
+
+    if (category && category !== 'Semua') {
+      whereClause.category = category;
+    }
+
+    if (query) {
+      // Cari di nama atau deskripsi, tidak case-sensitive
+      whereClause.OR = [
+        { name: { contains: query, mode: 'insensitive' } },
+        { description: { contains: query, mode: 'insensitive' } },
+      ];
+    }
+
     const umkms = await db.umkm.findMany({
-      // Urutkan berdasarkan data terbaru
+      where: whereClause,
       orderBy: {
-        createdAt: 'desc',
+        updatedAt: 'desc',
       },
     });
+    
     return NextResponse.json(umkms);
+
   } catch (error) {
     console.error("Gagal mengambil data UMKM:", error);
     return NextResponse.json(
@@ -24,7 +46,6 @@ export async function GET(request) {
 }
 
 // Fungsi untuk membuat 'slug' dari nama UMKM
-// Contoh: "Keripik Singkong Bu Yuni" -> "keripik-singkong-bu-yuni"
 function createSlug(name) {
   return name
     .toLowerCase()
