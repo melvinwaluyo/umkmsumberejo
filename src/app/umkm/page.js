@@ -73,7 +73,7 @@ function JelajahiUmkmComponent() {
     <div className="bg-amber-50 min-h-screen">
       <div className="container mx-auto px-6 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800">Jelajahi UMKM Sumberejo</h1>
+          <h1 className="text-4xl font-bold text-gray-800">Jelajah UMKM Sumberejo</h1>
           <p className="text-gray-600 mt-2">Temukan dan dukung produk lokal dari para pengusaha hebat di desa kami.</p>
         </div>
 

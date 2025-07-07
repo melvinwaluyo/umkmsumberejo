@@ -25,7 +25,7 @@ const Navbar = () => {
               Home
             </Link>
             <Link href="/umkm" className="text-gray-600 hover:text-green-700">
-              Jelajahi UMKM
+              Jelajah UMKM
             </Link>
             <Link href="/pemetaan" className="text-gray-600 hover:text-green-700">
               Pemetaan
@@ -63,7 +63,7 @@ const Navbar = () => {
               Home
             </Link>
             <Link href="/umkm" className="px-3 py-2 text-gray-600 rounded-md hover:bg-yellow-100 hover:text-green-700">
-              Jelajahi UMKM
+              Jelajah UMKM
             </Link>
             <Link href="/pemetaan" className="px-3 py-2 text-gray-600 rounded-md hover:bg-yellow-100 hover:text-green-700">
               Pemetaan
