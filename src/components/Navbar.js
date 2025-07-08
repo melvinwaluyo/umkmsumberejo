@@ -66,19 +66,29 @@ const Navbar = () => {
         </div>
 
         {/* Panel Menu Dropdown Mobile */}
-        <div className={`md:hidden mt-4 ${isOpen ? 'block' : 'hidden'}`}>
-          <div className="flex flex-col space-y-1">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className={`
-                px-3 py-2 rounded-md
-                ${pathname === link.href 
-                  ? 'bg-green-100 text-green-700 font-bold' 
-                  : 'text-gray-600 hover:bg-yellow-100 hover:text-green-700'
-                }
-              `}>
-                {link.label}
-              </Link>
-            ))}
+        <div className={`
+          absolute left-0 right-0 md:hidden transition-all duration-300 ease-in-out
+          ${isOpen ? 'top-full opacity-100 visible' : 'top-[90%] opacity-0 invisible'}
+        `}>
+          <div className="container mx-auto">
+             <div className="mt-2 p-4 bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 flex flex-col space-y-1">
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.href} 
+                  href={link.href} 
+                  onClick={() => setIsOpen(false)} // Close menu on click
+                  className={`
+                    px-3 py-2 rounded-md text-base
+                    ${pathname === link.href 
+                      ? 'bg-green-100 text-green-800 font-bold' 
+                      : 'text-gray-700 hover:bg-gray-100 hover:text-green-800'
+                    }
+                  `}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
