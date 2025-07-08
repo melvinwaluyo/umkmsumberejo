@@ -21,6 +21,7 @@ export default function ProductModal({ isOpen, onClose, onFormSubmit, umkmId, in
           setFilePreview(initialData.imageUrl);
         }
       } else {
+        // Reset for "add" mode
         setFormData({
           name: '', description: '', price: '', imageUrl: '', imagePublicId: '', umkmId: umkmId,
         });
@@ -30,7 +31,7 @@ export default function ProductModal({ isOpen, onClose, onFormSubmit, umkmId, in
     }
   }, [isOpen, isEditMode, initialData, umkmId]);
 
- const onDrop = useCallback(async (acceptedFiles) => {
+  const onDrop = useCallback(async (acceptedFiles) => {
     const file = acceptedFiles[0];
     if (!file) return;
 
@@ -39,43 +40,35 @@ export default function ProductModal({ isOpen, onClose, onFormSubmit, umkmId, in
     setError('');
 
     try {
-        const uploadFormData = new FormData();
-        uploadFormData.append('file', file);
-        uploadFormData.append('folder', 'umkmsumberejo/gambarproduk');
+      const uploadFormData = new FormData();
+      uploadFormData.append('file', file);
+      uploadFormData.append('folder', 'umkmsumberejo/gambarproduk');
+      
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: uploadFormData,
+      });
 
-        const res = await fetch('/api/admin/upload', {
-            method: 'POST',
-            body: uploadFormData,
-        });
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Gagal mengunggah file.');
+      }
 
-        // --- PENANGANAN ERROR LEBIH BAIK DI SINI ---
-        if (!res.ok) {
-            const contentType = res.headers.get("content-type");
-            // Jika responsnya bukan JSON, tampilkan pesan error yang lebih jelas
-            if (contentType && contentType.indexOf("application/json") === -1) {
-                throw new Error("Server tidak merespons dengan benar. Periksa kembali path API Anda.");
-            }
-            // Jika responsnya JSON, coba baca pesan errornya
-            const errorData = await res.json();
-            throw new Error(errorData.message || 'Gagal mengunggah file.');
-        }
-
-        const data = await res.json();
-        setFormData(prev => ({
-            ...prev,
-            imageUrl: data.imageUrl,
-            imagePublicId: data.public_id,
-        }));
+      const data = await res.json();
+      setFormData(prev => ({
+        ...prev,
+        imageUrl: data.imageUrl,
+        imagePublicId: data.public_id,
+      }));
 
     } catch (err) {
-        setError(err.message);
-        console.error(err);
+      setError(err.message);
     } finally {
-        setIsUploading(false);
+      setIsUploading(false);
     }
-}, []);
+  }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: { 'image/*': ['.jpeg', '.png', '.jpg'] },
     multiple: false,
@@ -93,19 +86,22 @@ export default function ProductModal({ isOpen, onClose, onFormSubmit, umkmId, in
     setError('');
 
     try {
-      // Untuk sekarang, kita hanya implementasi POST (tambah)
-      const res = await fetch('/api/admin/products', {
-        method: 'POST',
+      // Determine URL and method based on mode
+      const url = isEditMode ? `/api/admin/products/${initialData.id}` : '/api/admin/products';
+      const method = isEditMode ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method: method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.message || 'Gagal menambahkan produk.');
+        throw new Error(data.message || `Gagal ${isEditMode ? 'mengupdate' : 'menambahkan'} produk.`);
       }
-      const newProduct = await res.json();
-      onFormSubmit(newProduct);
+      const resultData = await res.json();
+      onFormSubmit(resultData); // Callback with new/updated data
       onClose();
     } catch (err) {
       setError(err.message);
@@ -135,7 +131,7 @@ export default function ProductModal({ isOpen, onClose, onFormSubmit, umkmId, in
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Gambar Produk</label>
-            <div {...getRootProps()} className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer ${isDragActive ? 'border-blue-500' : 'border-gray-300'}`}>
+            <div {...getRootProps()} className="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer">
               <input {...getInputProps()} />
               <FaUpload className="mx-auto text-gray-400 h-6 w-6 mb-1" />
               <p className="text-sm text-gray-600">Seret & lepas gambar di sini</p>
@@ -146,7 +142,7 @@ export default function ProductModal({ isOpen, onClose, onFormSubmit, umkmId, in
           <div className="flex justify-end gap-4 pt-4 border-t mt-6">
             <button type="button" onClick={onClose} className="px-5 py-2 bg-gray-200 rounded-lg text-gray-800 cursor-pointer hover:bg-gray-300">Batal</button>
             <button type="submit" disabled={isSubmitting || isUploading} className="px-5 py-2 bg-green-600 text-white rounded-lg cursor-pointer hover:bg-green-700 transition-colors disabled:bg-green-300">
-              {isSubmitting ? 'Menyimpan...' : 'Simpan Produk'}
+              {isSubmitting ? 'Menyimpan...' : 'Simpan'}
             </button>
           </div>
         </form>
