@@ -64,7 +64,7 @@ export async function POST(request) {
     // 2. Validasi data yang masuk (contoh sederhana)
     const { 
       name, category, description, address, 
-      whatsapp, bannerUrl, bannerPublicId, latitude, longitude 
+      whatsapp, bannerUrl, bannerPublicId, latitude, longitude, linktreeUrl
     } = data;
 
     if (!name || !category || !description || !address || !whatsapp || !latitude || !longitude) {
@@ -100,6 +100,7 @@ export async function POST(request) {
         whatsapp,
         bannerUrl: bannerUrl || "",
         bannerPublicId: bannerPublicId || null,
+        linktreeUrl: linktreeUrl || null, // Linktree URL opsional
         latitude: parseFloat(latitude), // Pastikan tipe data adalah angka
         longitude: parseFloat(longitude),
       },

@@ -41,6 +41,7 @@ export async function PUT(request, { params }) {
         whatsapp: body.whatsapp,
         bannerUrl: body.bannerUrl,
         bannerPublicId: body.bannerPublicId,
+        linktreeUrl: body.linktreeUrl, // Linktree URL opsional
         latitude: parseFloat(body.latitude),
         longitude: parseFloat(body.longitude),
       },

@@ -1,6 +1,6 @@
 import ProductCard from '@/components/ProductCard';
 import Breadcrumb from "@/components/Breadcrumb";
-import { FaMapMarkerAlt, FaWhatsapp, FaInfoCircle } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaWhatsapp, FaInfoCircle, FaLink } from 'react-icons/fa';
 import { notFound } from 'next/navigation';
 
 // Fungsi untuk mengambil data spesifik berdasarkan slug
@@ -84,6 +84,19 @@ export default async function UmkmDetailPage({ params }) {
                     Hubungi via WhatsApp
                   </a>
                 </div>
+                {umkm.linktreeUrl && (
+                  <div className="flex items-center gap-3">
+                    <FaLink className="text-gray-500 w-5 h-5 flex-shrink-0" />
+                    <a 
+                      href={ umkm.linktreeUrl.startsWith('http') ? umkm.linktreeUrl : `https://${umkm.linktreeUrl}` }
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-green-600 hover:underline"
+                    >
+                      {umkm.linktreeUrl}
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>

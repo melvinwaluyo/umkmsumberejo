@@ -127,6 +127,9 @@ export default function ManageUmkmClient({ initialUmkm }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 border-t pt-4">
                         <div><strong>Alamat:</strong> {umkm.address}</div>
                         <div><strong>WhatsApp:</strong> <a href={`https://wa.me/${umkm.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline">{umkm.whatsapp}</a></div>
+                        {umkm.linktreeUrl && (
+                            <div><strong>Tautan:</strong> <a href={ umkm.linktreeUrl.startsWith('http') ? umkm.linktreeUrl : `https://${umkm.linktreeUrl}` } target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline">{umkm.linktreeUrl}</a></div>
+                        )}
                         <div><strong>Latitude:</strong> {umkm.latitude}</div>
                         <div><strong>Longitude:</strong> {umkm.longitude}</div>
                     </div>

@@ -38,7 +38,7 @@ export default function UmkmModal({ isOpen, onClose, onFormSubmit, initialData =
   const resetForm = () => {
     setFormData({
         name: '', category: 'Kuliner', description: '', address: '',
-        whatsapp: '', bannerUrl: '', bannerPublicId: '', latitude: '', longitude: ''
+        whatsapp: '', bannerUrl: '', bannerPublicId: '', latitude: '', longitude: '', linktreeUrl: ''
     });
     setFilePreview(null);
     setError('');
@@ -159,7 +159,8 @@ export default function UmkmModal({ isOpen, onClose, onFormSubmit, initialData =
           <textarea name="description" value={formData.description || ''} onChange={handleInputChange} placeholder="Deskripsi Lengkap UMKM" required rows="4" className="w-full p-3 border rounded text-gray-700 focus:ring-2 focus:ring-green-500"></textarea>
           <input name="address" value={formData.address || ''} onChange={handleInputChange} placeholder="Alamat" required className="w-full p-3 border rounded text-gray-700 focus:ring-2 focus:ring-green-500" />
           <input name="whatsapp" value={formData.whatsapp || ''} onChange={handleInputChange} placeholder="Nomor WhatsApp (contoh: 628123...)" required className="w-full p-3 border rounded text-gray-700 focus:ring-2 focus:ring-green-500" />
-          
+          <input name="linktreeUrl" value={formData.linktreeUrl || ''} onChange={handleInputChange} placeholder="Linktree/Bento/Milkshake/... (opsional)" className="w-full p-3 border rounded text-gray-700 focus:ring-2 focus:ring-green-500" />
+
           {/* Drag and Drop Area */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Banner UMKM</label>
