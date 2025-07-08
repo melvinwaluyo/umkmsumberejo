@@ -64,7 +64,7 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // 1. Cari data UMKM lengkap dengan semua produknya
     const umkmToDelete = await db.umkm.findUnique({
