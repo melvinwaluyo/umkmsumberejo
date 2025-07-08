@@ -7,7 +7,7 @@ import UmkmCard from '@/components/UmkmCard';
 import useDebounce from '@/hooks/useDebounce';
 
 // Komponen utama dipisahkan agar bisa menggunakan hooks
-function JelajahiUmkmComponent() {
+function JelajahUmkmComponent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -123,6 +123,6 @@ function JelajahiUmkmComponent() {
 }
 
 // Wrapper untuk memastikan hooks bisa digunakan (best practice)
-export default function JelajahiUmkmPage() {
-    return <JelajahiUmkmComponent />;
+export default function JelajahUmkmPage() {
+    return <JelajahUmkmComponent />;
 }

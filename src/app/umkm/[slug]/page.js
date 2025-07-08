@@ -28,7 +28,7 @@ export default async function UmkmDetailPage({ params }) {
 
   const breadcrumbCrumbs = [
     { href: '/', label: 'Home' },
-    { href: '/umkm', label: 'Jelajahi UMKM' },
+    { href: '/umkm', label: 'Jelajah UMKM' },
     { href: `/umkm/${umkm.slug}`, label: umkm.name }
   ];
 
