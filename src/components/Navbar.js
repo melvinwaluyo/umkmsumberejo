@@ -1,11 +1,21 @@
-"use client"; // WAJIB: untuk menggunakan state
+"use client";
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation'; // <-- 1. Impor usePathname
 import Link from 'next/link';
 import Image from 'next/image';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname(); // <-- 2. Dapatkan path URL saat ini
+
+  // Definisikan link navigasi dalam sebuah array agar mudah dikelola
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/umkm', label: 'Jelajah UMKM' },
+    { href: '/pemetaan', label: 'Pemetaan' },
+    { href: '/artikel', label: 'Artikel' },
+  ];
 
   return (
     <nav className="bg-yellow-400 shadow-md sticky top-0 z-50">
@@ -21,18 +31,17 @@ const Navbar = () => {
 
           {/* Menu untuk Desktop */}
           <div className="hidden md:flex space-x-6">
-            <Link href="/" className="text-gray-600 hover:text-green-700">
-              Home
-            </Link>
-            <Link href="/umkm" className="text-gray-600 hover:text-green-700">
-              Jelajah UMKM
-            </Link>
-            <Link href="/pemetaan" className="text-gray-600 hover:text-green-700">
-              Pemetaan
-            </Link>
-            <Link href="/artikel" className="text-gray-600 hover:text-green-700">
-              Artikel
-            </Link>
+            {navLinks.map((link) => (
+              <Link key={link.href} href={link.href} className={`
+                transition-colors duration-200
+                ${pathname === link.href 
+                  ? 'text-green-700 font-bold border-b-2 border-green-700' 
+                  : 'text-gray-600 hover:text-green-700'
+                }
+              `}>
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           {/* Tombol Menu Mobile */}
@@ -40,7 +49,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="text-gray-800 hover:text-green-700 focus:outline-none focus:text-green-700"
+              className="text-gray-800 hover:text-green-700 focus:outline-none"
               aria-label="toggle menu"
             >
               {isOpen ? (
@@ -58,19 +67,18 @@ const Navbar = () => {
 
         {/* Panel Menu Dropdown Mobile */}
         <div className={`md:hidden mt-4 ${isOpen ? 'block' : 'hidden'}`}>
-          <div className="flex flex-col space-y-2">
-            <Link href="/" className="px-3 py-2 text-gray-600 rounded-md hover:bg-yellow-100 hover:text-green-700">
-              Home
-            </Link>
-            <Link href="/umkm" className="px-3 py-2 text-gray-600 rounded-md hover:bg-yellow-100 hover:text-green-700">
-              Jelajah UMKM
-            </Link>
-            <Link href="/pemetaan" className="px-3 py-2 text-gray-600 rounded-md hover:bg-yellow-100 hover:text-green-700">
-              Pemetaan
-            </Link>
-            <Link href="/artikel" className="px-3 py-2 text-gray-600 rounded-md hover:bg-yellow-100 hover:text-green-700">
-              Artikel
-            </Link>
+          <div className="flex flex-col space-y-1">
+            {navLinks.map((link) => (
+              <Link key={link.href} href={link.href} className={`
+                px-3 py-2 rounded-md
+                ${pathname === link.href 
+                  ? 'bg-green-100 text-green-700 font-bold' 
+                  : 'text-gray-600 hover:bg-yellow-100 hover:text-green-700'
+                }
+              `}>
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
