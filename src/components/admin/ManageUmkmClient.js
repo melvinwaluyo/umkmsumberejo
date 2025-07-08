@@ -5,25 +5,39 @@ import { FaEdit, FaTrash, FaPlus, FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
 import UmkmModal from "./UmkmModal";
+import ProductModal from "./ProductModal";
 
 // Komponen ini menerima data dari Server Component
 export default function ManageUmkmClient({ initialUmkm }) {
     const [umkm, setUmkm] = useState(initialUmkm);
     const [products, setProducts] = useState(initialUmkm.products);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isUmkmModalOpen, setIsUmkmModalOpen] = useState(false);
+    const [isProductModalOpen, setIsProductModalOpen] = useState(false);
 
     // Fungsi ini akan mengupdate UI setelah edit berhasil
     const handleUmkmUpdated = (updatedUmkm) => {
         setUmkm(updatedUmkm);
     };
 
+    // Fungsi untuk menangani penambahan produk baru
+    const handleProductAdded = (newProduct) => {
+        setProducts(prevProducts => [newProduct, ...prevProducts]);
+    };
+
     return (
         <>
             <UmkmModal
-                    isOpen={isEditModalOpen}
-                    onClose={() => setIsEditModalOpen(false)}
+                    isOpen={isUmkmModalOpen}
+                    onClose={() => setIsUmkmModalOpen(false)}
                     onFormSubmit={handleUmkmUpdated}
                     initialData={umkm} // Kirim data UMKM saat ini untuk mode edit
+            />
+
+             <ProductModal
+                isOpen={isProductModalOpen}
+                onClose={() => setIsProductModalOpen(false)}
+                onFormSubmit={handleProductAdded}
+                umkmId={umkm.id} // Kirim ID UMKM sebagai parent
             />
             <div className="container mx-auto px-6 py-8 bg-amber-50 min-h-screen">
                 {/* Header Halaman */}
@@ -34,7 +48,7 @@ export default function ManageUmkmClient({ initialUmkm }) {
                     {/* Banner UMKM */}
                     <div className="relative w-full h-48 md:h-64 rounded-lg overflow-hidden shadow-lg mb-4">
                         <Image
-                            src={(umkm.bannerUrl || "https://via.placeholder.com/1200x400?text=Banner+UMKM").trim()}
+                            src={(umkm.bannerUrl || "https://dummyimage.com/1200x400/000/fff&text=Banner+UMKM").trim()}
                             alt={`Banner ${umkm.name}`}
                             layout="fill"
                             objectFit="cover"
@@ -58,7 +72,7 @@ export default function ManageUmkmClient({ initialUmkm }) {
                     </div>
                     <div>
                         <button 
-                            onClick={() => setIsEditModalOpen(true)}
+                            onClick={() => setIsUmkmModalOpen(true)}
                             className="mt-6 flex items-center gap-2 px-4 py-2 bg-yellow-500 text-white font-semibold rounded-lg cursor-pointer hover:bg-yellow-600 transition-colors"
                         >
                             <FaEdit /> Edit Detail UMKM
@@ -70,7 +84,10 @@ export default function ManageUmkmClient({ initialUmkm }) {
                 <div className="bg-white p-6 rounded-lg shadow-md">
                     <div className="flex justify-between items-center mb-4">
                         <h2 className="text-2xl font-bold text-gray-800">Katalog Produk</h2>
-                        <button className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors cursor-pointer">
+                        <button 
+                            onClick={() => setIsProductModalOpen(true)}
+                            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg cursor-pointer hover:bg-green-800 transition-colors"
+                        >
                             <FaPlus /> Tambah Produk Baru
                         </button>
                     </div>
@@ -92,7 +109,7 @@ export default function ManageUmkmClient({ initialUmkm }) {
                                                 <div className="flex-shrink-0 h-16 w-16">
                                                     <Image
                                                         className="h-16 w-16 rounded-md object-cover"
-                                                        src={(product.imageUrl || "https://via.placeholder.com/100").trim()}
+                                                        src={(product.imageUrl || "https://dummyimage.com/100x100/000/fff&text=Produk").trim()}
                                                         alt={product.name}
                                                         width={64}
                                                         height={64}
@@ -106,8 +123,8 @@ export default function ManageUmkmClient({ initialUmkm }) {
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.price}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button className="text-indigo-600 hover:text-indigo-900 mr-4"><FaEdit /></button>
-                                            <button className="text-red-600 hover:text-red-900"><FaTrash /></button>
+                                            <button className="text-indigo-600 hover:text-indigo-900 mr-4 cursor-pointer"><FaEdit /></button>
+                                            <button className="text-red-600 hover:text-red-900 cursor-pointer"><FaTrash /></button>
                                         </td>
                                     </tr>
                                 )) : (

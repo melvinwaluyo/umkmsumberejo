@@ -35,15 +35,20 @@ model Umkm {
 model Product {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  price       String
   description String
+  price       String
   imageUrl    String
-  createdAt   DateTime @default(now())
-  umkm        Umkm     @relation(fields: [umkmId], references: [id])
-  umkmId      String   @db.ObjectId
+  imagePublicId String? // <-- Pastikan baris ini ada
+
+  // Relasi ke UMKM
+  umkmId String   @db.ObjectId
+  umkm   Umkm     @relation(fields: [umkmId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-// --- MODELs UNTUK ADMIN ---
+// --- Model UNTUK ADMIN ---
 model Admin {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   email     String   @unique // Email untuk login, harus unik

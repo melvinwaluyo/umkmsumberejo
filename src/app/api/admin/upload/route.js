@@ -6,40 +6,54 @@ cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true, // Pastikan URL yang dihasilkan adalah https
+  secure: true,
 });
 
+// Fungsi untuk menangani upload stream ke Cloudinary
+const handleUpload = (fileBuffer, folder) => {
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder: folder, // Gunakan folder yang diterima dari parameter
+        resource_type: 'auto',
+      },
+      (error, result) => {
+        if (error) {
+          // Jika ada error dari Cloudinary, tolak promise
+          console.error("Cloudinary Upload Stream Error:", error);
+          reject(error);
+        } else {
+          // Jika berhasil, selesaikan promise dengan hasilnya
+          resolve(result);
+        }
+      }
+    );
+    // Kirim buffer ke stream
+    uploadStream.end(fileBuffer);
+  });
+};
+
 export async function POST(request) {
-  // --- LANGKAH DEBUGGING ---
-  // Cek apakah kredensial terbaca dengan benar di server.
-  // Anda akan melihat ini di log terminal Anda.
-  console.log("CLOUDINARY_CLOUD_NAME:", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ? "Loaded" : "NOT LOADED");
-  console.log("CLOUDINARY_API_KEY:", process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY ? "Loaded" : "NOT LOADED");
-  console.log("CLOUDINARY_API_SECRET:", process.env.CLOUDINARY_API_SECRET ? "Loaded" : "NOT LOADED");
-  // --- AKHIR LANGKAH DEBUGGING ---
-
-  const formData = await request.formData();
-  const file = formData.get('file');
-
-  if (!file) {
-    return NextResponse.json({ message: 'No file uploaded.' }, { status: 400 });
-  }
-
   try {
-    // Ubah file menjadi buffer
+    // 1. Ambil form data dari request
+    const formData = await request.formData();
+    const file = formData.get('file');
+    // 2. Ambil nama folder dari form data, atau gunakan folder default jika tidak ada
+    const folder = formData.get('folder') || 'umkmsumberejo/lainnya';
+
+    // 3. Validasi apakah file ada
+    if (!file) {
+      return NextResponse.json({ message: 'No file uploaded.' }, { status: 400 });
+    }
+
+    // 4. Ubah file menjadi Buffer
     const fileBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(fileBuffer);
+    
+    // 5. Panggil fungsi handleUpload dan kirim buffer beserta nama folder
+    const result = await handleUpload(buffer, folder);
 
-    // Konversi buffer menjadi base64 Data URI
-    const base64String = `data:${file.type};base64,${buffer.toString('base64')}`;
-
-    // Upload menggunakan base64 string, ini metode yang sangat andal
-    const result = await cloudinary.uploader.upload(base64String, {
-      folder: 'umkmsumberejo', // Folder tujuan
-      resource_type: 'auto',
-    });
-
-    // Kembalikan URL yang aman jika berhasil
+    // 6. Kembalikan URL gambar yang aman dan public_id
     return NextResponse.json({
       imageUrl: result.secure_url,
       public_id: result.public_id,

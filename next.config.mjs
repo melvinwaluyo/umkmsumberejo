@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'res.cloudinary.com', // Mengizinkan semua subdomain cloudinary.com
       },
+      {
+        protocol: 'https',
+        hostname: 'dummyimage.com', 
+      },
     ],
   },
 };

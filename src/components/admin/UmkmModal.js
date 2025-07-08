@@ -37,10 +37,11 @@ export default function UmkmModal({ isOpen, onClose, onFormSubmit, initialData =
   // Fungsi untuk mereset form
   const resetForm = () => {
     setFormData({
-        name: '', category: '', description: '', address: '',
+        name: '', category: 'Kuliner', description: '', address: '',
         whatsapp: '', bannerUrl: '', bannerPublicId: '', latitude: '', longitude: ''
     });
     setFilePreview(null);
+    setError('');
   };
 
   // --- MAPS & UPLOAD LOGIC (Tidak Berubah) ---

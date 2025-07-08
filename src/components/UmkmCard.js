@@ -15,7 +15,7 @@ const UmkmCard = ({ umkm }) => {
         <div className="relative w-full h-48">
           <img 
             // Gunakan bannerUrl dari database
-            src={umkm.bannerUrl || "https://via.placeholder.com/300x200?text=Gambar+UMKM"} 
+            src={umkm.bannerUrl || "https://dummyimage.com/300x200/000/fff&text=Gambar+UMKM"} 
             alt={`Gambar untuk ${umkm.name}`}
             className="w-full h-full object-cover"
           />
