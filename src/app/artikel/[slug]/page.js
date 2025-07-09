@@ -12,12 +12,15 @@ const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]{
   "authorName": author->name,
   mainImage,
   publishedAt,
+  "categories": categories[]->{
+    _id,
+    title
+  },
   body[]{
     ..., 
-    _type == "image" => {
-      ...,
-      asset->
-    }
+    _type == "image" => { ..., asset-> },
+    _type == "imageGallery" => { ..., images[]{ ..., asset-> } },
+    _type == "youtube" => { ... }
   }
 }`;
 
@@ -26,9 +29,7 @@ const { projectId, dataset } = client.config();
 const ptComponents = {
   types: {
     image: ({ value }) => {
-      if (!value?.asset?._id) {
-        return null;
-      }
+      if (!value?.asset?._id) return null;
       return (
         <SanityImage
           id={value.asset._id}
@@ -41,33 +42,34 @@ const ptComponents = {
     },
     youtube: ({ value }) => {
       const { url } = value;
-      if (!url) {
-        return null;
-      }
+      if (!url) return null;
       return <YouTubeEmbed url={url} />;
     },
     imageGallery: ({ value }) => {
-      // Tentukan jumlah kolom berdasarkan pilihan di Sanity
       const columnClass = value.layout === '3-columns' ? 'grid-cols-3' : 'grid-cols-2';
-
       return (
         <div className={`grid ${columnClass} gap-4 my-8`}>
-          {value.images.map(image => (
-            <figure key={image._key} className="break-inside-avoid">
-              <SanityImage
-                id={image.asset._ref} // ID aset gambar
-                projectId={projectId}
-                dataset={dataset}
-                alt={image.alt || 'Gambar galeri'}
-                className="w-full h-auto rounded-lg shadow-md"
-              />
-              {image.caption && (
-                <figcaption className="text-center text-sm text-gray-600 mt-2">
-                  {image.caption}
-                </figcaption>
-              )}
-            </figure>
-          ))}
+          {value.images?.map(image => {
+            // Safety check jika gambar di dalam galeri tidak valid
+            if (!image.asset?._id) return null; 
+            return (
+              <figure key={image._key} className="break-inside-avoid">
+                <SanityImage
+                  // --- PERBAIKAN DI SINI ---
+                  id={image.asset._id} // Gunakan _id, bukan _ref
+                  projectId={projectId}
+                  dataset={dataset}
+                  alt={image.alt || 'Gambar galeri'}
+                  className="w-full h-auto rounded-lg shadow-md"
+                />
+                {image.caption && (
+                  <figcaption className="text-center text-sm text-gray-600 mt-2">
+                    {image.caption}
+                  </figcaption>
+                )}
+              </figure>
+            )
+          })}
         </div>
       );
     },
@@ -90,24 +92,18 @@ export default async function ArtikelDetailPage({ params }) {
 
   return (
     <div className="bg-amber-50 py-12">
-      <article className="container mx-auto max-w-3xl bg-white p-8 md:p-12 rounded-lg shadow-lg">
+      <article className="container mx-auto max-w-5xl bg-white p-8 md:p-12 rounded-lg shadow-lg">
         <Breadcrumb crumbs={breadcrumbCrumbs} />
 
-        {post.mainImage && (
-          <div className="mt-6 mb-8 rounded-lg overflow-hidden">
-             <SanityImage
-                id={post.mainImage.asset._ref}
-                projectId={projectId}
-                dataset={dataset}
-                alt={`Gambar utama untuk ${post.title}`}
-                className="w-full h-auto"
-                // The 'priority' prop has been removed from here
-             />
-          </div>
-        )}
+        <div className="mt-6 flex flex-wrap items-center gap-2">
+          {post.categories?.map((category) => (
+            <span key={category._id} className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+              {category.title}
+            </span>
+          ))}
+        </div>
 
-        {/* Article Header */}
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mt-4 mb-4 leading-tight">
             {post.title}
         </h1>
         <div className="mb-8">
@@ -121,7 +117,19 @@ export default async function ArtikelDetailPage({ params }) {
             </p>
         </div>
 
-        {/* Article Body */}
+        {post.mainImage && (
+          <div className="mb-8 rounded-lg overflow-hidden">
+             <SanityImage
+                // Gunakan _ref di sini karena mainImage tidak diperluas dengan '->'
+                id={post.mainImage.asset._ref}
+                projectId={projectId}
+                dataset={dataset}
+                alt={`Gambar utama untuk ${post.title}`}
+                className="w-full h-auto"
+             />
+          </div>
+        )}
+
         <div 
           className="
             prose prose-lg max-w-none
