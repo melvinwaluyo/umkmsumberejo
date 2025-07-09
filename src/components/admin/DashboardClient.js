@@ -3,43 +3,45 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FaPlus, FaUsers, FaBoxOpen, FaEdit, FaTrash, FaSignOutAlt } from 'react-icons/fa';
+import { FaPlus, FaUsers, FaBoxOpen, FaEdit, FaTrash, FaSignOutAlt, FaPenSquare } from 'react-icons/fa';
 import { signOut } from 'next-auth/react';
-import UmkmModal from "./UmkmModal"; // Ganti nama impor ke UmkmModal
-import ConfirmModal from './ConfirmModal'; // Impor modal konfirmasi
-import { toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import UmkmModal from "./UmkmModal";
+import ConfirmModal from './ConfirmModal';
 
+// Komponen ini menerima data awal dari Server Component
 export default function DashboardClient({ initialUmkmData, summaryData }) {
   const [umkmList, setUmkmList] = useState(initialUmkmData || []);
   const [isUmkmModalOpen, setIsUmkmModalOpen] = useState(false);
   const router = useRouter();
 
-  // --- STATE BARU UNTUK MODAL KONFIRMASI ---
+  // State untuk modal konfirmasi hapus
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [umkmToDelete, setUmkmToDelete] = useState(null);
 
-  // Fungsi untuk membuka modal konfirmasi dan menyimpan data UMKM yang akan dihapus
+  // Ambil URL Sanity Studio dari environment variable
+  const sanityStudioUrl = process.env.NEXT_PUBLIC_SANITY_STUDIO_URL;
+
+  // Fungsi untuk membuka modal konfirmasi
   const handleOpenConfirmModal = (umkm) => {
     setUmkmToDelete(umkm);
     setIsConfirmModalOpen(true);
   };
 
-  // Fungsi yang dijalankan saat tombol "Hapus" di modal dikonfirmasi
+  // Fungsi yang dijalankan saat penghapusan dikonfirmasi
   const handleConfirmDelete = async () => {
     if (!umkmToDelete) return;
     
     const toastId = toast.loading('Menghapus UMKM...');
-
     try {
       const res = await fetch(`/api/admin/umkm/${umkmToDelete.id}`, {
         method: 'DELETE',
       });
 
       if (res.ok) {
-        // Hapus UMKM dari state agar UI ter-update tanpa refresh
         toast.success(`UMKM "${umkmToDelete.name}" berhasil dihapus.`, { id: toastId });
         setUmkmList(prevList => prevList.filter(umkm => umkm.id !== umkmToDelete.id));
-        router.refresh();
+        router.refresh(); // Segarkan data statistik
       } else {
         const data = await res.json();
         toast.error(`Gagal menghapus: ${data.message}`, { id: toastId });
@@ -47,15 +49,15 @@ export default function DashboardClient({ initialUmkmData, summaryData }) {
     } catch (error) {
       toast.error("Terjadi kesalahan pada server.", { id: toastId });
     } finally {
-      // Selalu tutup modal dan reset state setelah aksi selesai
       setIsConfirmModalOpen(false);
       setUmkmToDelete(null);
     }
   };
 
+  // Fungsi setelah UMKM baru berhasil ditambahkan
   const handleUmkmAdded = (newUmkm) => {
     setUmkmList(prevList => [newUmkm, ...prevList]);
-    router.refresh();
+    router.refresh(); // Segarkan data statistik
   };
 
   return (
@@ -73,7 +75,7 @@ export default function DashboardClient({ initialUmkmData, summaryData }) {
         onClose={() => setIsConfirmModalOpen(false)}
         onConfirm={handleConfirmDelete}
         title="Konfirmasi Penghapusan"
-        message={`Apakah Anda yakin ingin menghapus UMKM "${umkmToDelete?.name}"? Tindakan ini tidak dapat dibatalkan.`}
+        message={`Apakah Anda yakin ingin menghapus UMKM "${umkmToDelete?.name}"? Tindakan ini akan menghapus semua produk dan gambar terkait.`}
       />
       
       <div className="container mx-auto px-6 py-8">
@@ -93,7 +95,7 @@ export default function DashboardClient({ initialUmkmData, summaryData }) {
           </div>
         </div>
 
-        {/* Bagian Ringkasan */}
+        {/* Bagian Ringkasan Statistik */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div className="p-6 bg-white rounded-lg shadow-md flex items-center gap-4">
             <FaUsers className="w-10 h-10 text-blue-500" />
@@ -112,13 +114,21 @@ export default function DashboardClient({ initialUmkmData, summaryData }) {
         </div>
         
         {/* Tombol Aksi Utama */}
-        <div className="mb-8 flex gap-4">
+        <div className="mb-8 flex flex-wrap gap-4">
           <button
             onClick={() => setIsUmkmModalOpen(true)}
             className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors cursor-pointer"
           >
             <FaPlus /> Tambah UMKM Baru
           </button>
+          <a
+            href={sanityStudioUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors cursor-pointer"
+          >
+            <FaPenSquare /> Kelola Konten Artikel
+          </a>
         </div>
 
         {/* Tabel Manajemen UMKM */}
@@ -151,7 +161,6 @@ export default function DashboardClient({ initialUmkmData, summaryData }) {
                       <Link href={`/admin/dashboard/umkm/${umkm.id}`} className="text-indigo-600 hover:text-indigo-900" title="Kelola UMKM & Produk">
                         <FaEdit />
                       </Link>
-                      {/* Tombol hapus sekarang memanggil handleOpenConfirmModal */}
                       <button onClick={() => handleOpenConfirmModal(umkm)} className="text-red-600 hover:text-red-900 cursor-pointer" title="Hapus UMKM">
                         <FaTrash />
                       </button>

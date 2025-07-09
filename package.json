@@ -10,7 +10,10 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.1",
     "@prisma/client": "^6.11.1",
+    "@sanity/client": "^7.6.0",
+    "@sanity/image-url": "^1.1.0",
     "@vis.gl/react-google-maps": "^1.5.3",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",
@@ -22,11 +25,13 @@
     "react-dropzone": "^14.3.8",
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
-    "react-leaflet": "^5.0.0"
+    "react-leaflet": "^5.0.0",
+    "sanity-image": "^1.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/leaflet": "^1.9.19",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
