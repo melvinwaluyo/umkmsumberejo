@@ -3,6 +3,7 @@ import { PortableText } from '@portabletext/react';
 import { SanityImage } from 'sanity-image';
 import { notFound } from 'next/navigation';
 import Breadcrumb from '@/components/Breadcrumb';
+import YouTubeEmbed from "@/components/YoutubeEmbed";
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]{
   _id,
@@ -36,6 +37,38 @@ const ptComponents = {
           alt={value.alt || 'Gambar di dalam artikel'}
           className="my-8 shadow-lg rounded-lg"
         />
+      );
+    },
+    youtube: ({ value }) => {
+      const { url } = value;
+      if (!url) {
+        return null;
+      }
+      return <YouTubeEmbed url={url} />;
+    },
+    imageGallery: ({ value }) => {
+      // Tentukan jumlah kolom berdasarkan pilihan di Sanity
+      const columnClass = value.layout === '3-columns' ? 'grid-cols-3' : 'grid-cols-2';
+
+      return (
+        <div className={`grid ${columnClass} gap-4 my-8`}>
+          {value.images.map(image => (
+            <figure key={image._key} className="break-inside-avoid">
+              <SanityImage
+                id={image.asset._ref} // ID aset gambar
+                projectId={projectId}
+                dataset={dataset}
+                alt={image.alt || 'Gambar galeri'}
+                className="w-full h-auto rounded-lg shadow-md"
+              />
+              {image.caption && (
+                <figcaption className="text-center text-sm text-gray-600 mt-2">
+                  {image.caption}
+                </figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
       );
     },
   },

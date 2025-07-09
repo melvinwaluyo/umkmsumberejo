@@ -63,5 +63,13 @@ export default defineType({
       type: 'image',
       options: {hotspot: true},
     }),
+    // Izinkan video YouTube untuk ditambahkan
+    defineArrayMember({
+      type: 'youtube',
+    }),
+    defineArrayMember({
+      type: 'imageGallery',
+      title: 'Galeri Gambar Berjejer'
+    }),
   ],
 })
