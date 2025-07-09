@@ -67,7 +67,7 @@ function JelajahUmkmComponent() {
       
   }, [debouncedSearchTerm, activeCategory, pathname, router]); // Jalankan efek ini jika filter berubah
 
-  const categories = ['Semua', 'Kuliner', 'Kerajinan'];
+  const categories = ['Semua', 'Kuliner', 'Kerajinan', 'Jasa'];
 
   return (
     <div className="bg-amber-50 min-h-screen">

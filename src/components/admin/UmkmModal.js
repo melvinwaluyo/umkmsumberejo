@@ -153,6 +153,7 @@ export default function UmkmModal({ isOpen, onClose, onFormSubmit, initialData =
             >
               <option value="Kuliner">Kuliner</option>
               <option value="Kerajinan">Kerajinan</option>
+              <option value="Jasa">Jasa</option>
               {/*  Bisa tambah kategori lain di sini nanti */}
             </select>
           </div>

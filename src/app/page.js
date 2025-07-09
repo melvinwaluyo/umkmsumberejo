@@ -2,6 +2,7 @@ import Hero from '../components/Hero';
 import FeaturedUmkm from '../components/FeaturedUmkm';
 import KategoriUmkm from '../components/KategoriUmkm';
 import PetaPreview from '../components/PetaPreview';
+import FeaturedArticles from "@/components/FeaturedArticles";
 
 
 export default function Home() {
@@ -18,6 +19,9 @@ export default function Home() {
       
       {/* Section 4: Ajakan untuk melihat peta sebaran */}
       <PetaPreview />
+      
+      {/* Section 5: Artikel dan wawasan terbaru */}
+      <FeaturedArticles />
     </div>
   );
 }
