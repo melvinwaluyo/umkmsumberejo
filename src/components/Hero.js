@@ -1,7 +1,12 @@
 const Hero = () => {
   return (
-    <section className="bg-green-700 text-white">
-      <div className="container mx-auto px-6 py-24 text-center">
+    <section 
+      className="text-white relative bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/BannerWeb.png')",
+      }}
+    >
+      <div className="container mx-auto px-6 py-24 text-center relative z-10">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight">
           Selamat Datang di Portal UMKM Sumberejo
         </h1>
