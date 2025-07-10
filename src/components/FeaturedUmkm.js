@@ -1,25 +1,27 @@
-import UmkmCard from './UmkmCard'; // Impor komponen UmkmCard
+import db from '@/lib/db'; // 1. Impor klien Prisma
+import UmkmCard from './UmkmCard';
 
-// Fungsi untuk mengambil data dari API
+/**
+ * Mengambil 3 artikel terbaru langsung dari database.
+ */
 async function getFeaturedUmkmData() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/umkm/featured`, {
-      cache: 'no-store', // Selalu ambil data terbaru
+    // 2. Ambil data langsung menggunakan Prisma
+    const posts = await db.umkm.findMany({
+      orderBy: {
+        updatedAt: 'desc',
+      },
+      take: 3,
     });
-
-    if (!res.ok) {
-      console.error("Gagal mengambil UMKM Unggulan, status:", res.status);
-      return [];
-    }
-    return res.json();
+    return posts;
   } catch (error) {
-    console.error("Terjadi error saat fetch UMKM Unggulan:", error);
-    return [];
+    console.error("Gagal mengambil UMKM Unggulan dari DB:", error);
+    return []; // Kembalikan array kosong jika gagal
   }
 }
 
-// Komponen ini sekarang menjadi Server Component yang async
 export default async function FeaturedUmkm() {
+  // Panggil fungsi yang sudah diubah
   const umkmData = await getFeaturedUmkmData();
 
   return (
@@ -29,12 +31,11 @@ export default async function FeaturedUmkm() {
           UMKM Unggulan
         </h2>
         <p className="text-center text-gray-600 mb-12">
-          Berikut adalah beberapa UMKM yang menjadi primadona di Kalurahan Sumberejo.
+          Berikut adalah beberapa UMKM yang menjadi primadona di Kelurahan Sumberejo.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {umkmData && umkmData.length > 0 ? (
-            // Gunakan komponen UmkmCard di sini
             umkmData.map((umkm) => (
               <UmkmCard key={umkm.id} umkm={umkm} />
             ))

@@ -58,7 +58,6 @@ DATABASE_URL="mongodb+srv://..."
 
 # NextAuth
 NEXTAUTH_SECRET="your-super-secret-key"
-NEXTAUTH_URL="http://localhost:3000"
 
 # Google Maps API
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your-google-maps-api-key"
