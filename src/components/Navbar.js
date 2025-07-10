@@ -56,7 +56,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo dan Judul Website */}
           <div className="flex items-center space-x-4">
-            <Image src="/logo.png" alt="Logo" width={40} height={40} className="rounded-full" />
+            <Image src="/Logo.png" alt="Logo" width={40} height={40} className="rounded-full" />
             <Link href="/" className="text-xl font-bold text-green-700">
               UMKM Sumberejo
             </Link>
