@@ -36,7 +36,7 @@ const Navbar = () => {
                 transition-colors duration-200
                 ${pathname === link.href 
                   ? 'text-green-700 font-bold border-b-2 border-green-700' 
-                  : 'text-gray-600 hover:text-green-700'
+                  : 'text-black hover:text-green-700'
                 }
               `}>
                 {link.label}
@@ -49,7 +49,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="text-gray-800 hover:text-green-700 focus:outline-none"
+              className="text-green-700 hover:text-green-700 focus:outline-none"
               aria-label="toggle menu"
             >
               {isOpen ? (
@@ -81,7 +81,7 @@ const Navbar = () => {
                     px-3 py-2 rounded-md text-base
                     ${pathname === link.href 
                       ? 'bg-green-100 text-green-800 font-bold' 
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-green-800'
+                      : 'text-black hover:bg-green-100 hover:text-green-800'
                     }
                   `}
                 >
