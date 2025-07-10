@@ -16,16 +16,16 @@ export default function RegisterCta() {
       <Image 
         src="/Register-topleft.png" 
         alt="" 
-        width={300} 
-        height={300} 
+        width={350} 
+        height={350} 
         aria-hidden="true"
         className="absolute top-0 left-0 z-10 hidden lg:block"
       />
       <Image 
         src="/Register-topright.png" 
         alt="" 
-        width={300} 
-        height={300} 
+        width={350} 
+        height={350} 
         aria-hidden="true"
         className="absolute top-0 right-0 z-10 hidden lg:block"
       />
