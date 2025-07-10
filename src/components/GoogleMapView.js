@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image'; // Impor komponen Image dari Next.js
 
 const GoogleMapView = ({ umkmData }) => {
-  const position = { lat: -7.9254, lng: 110.6534 };
+  const position = { lat: -7.843752, lng: 110.733106 };
   const [selectedUmkm, setSelectedUmkm] = useState(null);
 
   // Fungsi untuk menutup InfoWindow
