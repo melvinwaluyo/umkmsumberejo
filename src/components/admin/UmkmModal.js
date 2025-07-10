@@ -4,6 +4,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FaTimes, FaUpload } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
+import Image from "next/image";
 
 // Komponen Modal yang bisa untuk mode Tambah dan Edit
 export default function UmkmModal({ isOpen, onClose, onFormSubmit, initialData = null }) {
@@ -171,7 +172,16 @@ export default function UmkmModal({ isOpen, onClose, onFormSubmit, initialData =
               <p className="text-gray-700">{isDragActive ? 'Lepaskan file di sini...' : 'Seret & lepas gambar, atau klik untuk memilih'}</p>
             </div>
             {isUploading && <p className="text-sm text-gray-500 mt-2">Mengunggah gambar...</p>}
-            {filePreview && <img src={filePreview} alt="Preview" className="mt-4 h-32 w-auto rounded-lg object-cover mx-auto shadow-md"/>}
+            {filePreview && (
+              <Image 
+                src={filePreview} 
+                alt="Preview" 
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="mt-4 h-32 w-auto rounded-lg object-cover mx-auto shadow-md"
+              />
+            )}
           </div>
 
           {/* Map & Lat/Lng Inputs */}

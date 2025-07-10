@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from "next/image";
 
 const UmkmCard = ({ umkm }) => {
   // Fungsi untuk memotong deskripsi jika terlalu panjang
@@ -13,11 +14,12 @@ const UmkmCard = ({ umkm }) => {
     <Link href={`/umkm/${umkm.slug}`}>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full group transform hover:-translate-y-2 transition-all duration-300">
         <div className="relative w-full h-48">
-          <img 
+          <Image 
             // Gunakan bannerUrl dari database
             src={umkm.bannerUrl || "https://dummyimage.com/300x200/000/fff&text=Gambar+UMKM"} 
             alt={`Gambar untuk ${umkm.name}`}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
           <div className="absolute top-2 right-2 bg-green-700 text-white text-xs font-semibold px-2 py-1 rounded-full">
             {umkm.category}

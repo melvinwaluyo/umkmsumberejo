@@ -11,7 +11,7 @@ const PetaPreview = () => {
             Temukan Lokasi UMKM
           </h2>
           <p className="text-lg text-gray-300 mb-8">
-            Lihat sebaran lokasi UMKM di seluruh Kelurahan Sumberejo melalui peta interaktif kami. Temukan UMKM terdekat dari lokasi Anda dengan mudah.
+            Lihat sebaran lokasi UMKM di seluruh Kalurahan Sumberejo melalui peta interaktif kami. Temukan UMKM terdekat dari lokasi Anda dengan mudah.
           </p>
           <Link href="/pemetaan">
             <span className="inline-block bg-yellow-400 text-green-800 font-bold py-3 px-8 rounded-full hover:bg-yellow-300 transition duration-300 shadow-lg transform hover:scale-105">

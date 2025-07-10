@@ -2,6 +2,7 @@ import ProductCard from '@/components/ProductCard';
 import Breadcrumb from "@/components/Breadcrumb";
 import { FaMapMarkerAlt, FaWhatsapp, FaInfoCircle, FaLink } from 'react-icons/fa';
 import { notFound } from 'next/navigation';
+import Image from "next/image";
 
 // Fungsi untuk mengambil data spesifik berdasarkan slug
 async function getUmkmDetail(slug) {
@@ -36,7 +37,13 @@ export default async function UmkmDetailPage({ params }) {
     <div>
       {/* Bagian Banner */}
       <div className="relative h-64 md:h-80">
-        <img src={umkm.bannerUrl || "https://apikbersatu.com/wp-content/uploads/2025/02/umkm211.jpg"} alt={`Banner ${umkm.name}`} className="w-full h-full object-cover"/>
+        <Image 
+          src={umkm.bannerUrl || "https://dummyimage.com/300x200/000/fff&text=Gambar+UMKM"} 
+          alt={`Banner ${umkm.name}`} 
+          fill
+          className="object-cover"
+          priority
+        />
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white text-center px-4">{umkm.name}</h1>
         </div>

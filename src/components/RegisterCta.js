@@ -47,10 +47,10 @@ export default function RegisterCta() {
       />
       
       {/* 4. Konten utama dengan z-index paling tinggi */}
-      <div className="relative container mx-auto px-6 py-20 text-center text-white z-20">
+      <div className="relative container mx-auto px-6 py-24 text-center text-white z-20">
         <h2 className="text-4xl font-bold drop-shadow-md">Punya Usaha di Sumberejo?</h2>
         <p className="mt-4 text-lg max-w-3xl mx-auto text-green-100 drop-shadow-sm">
-          Ayo daftarkan UMKM Anda sekarang juga agar dapat dikenal lebih luas dan menjadi bagian dari pemetaan digital Kelurahan Sumberejo.
+          Ayo daftarkan UMKM Anda sekarang juga agar dapat dikenal lebih luas dan menjadi bagian dari pemetaan digital Kalurahan Sumberejo.
         </p>
         <div className="mt-8">
           <a

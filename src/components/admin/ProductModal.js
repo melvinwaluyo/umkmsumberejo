@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FaTimes, FaUpload } from 'react-icons/fa';
+import Image from "next/image";
 
 export default function ProductModal({ isOpen, onClose, onFormSubmit, umkmId, initialData = null }) {
   const [formData, setFormData] = useState({});
@@ -136,7 +137,16 @@ export default function ProductModal({ isOpen, onClose, onFormSubmit, umkmId, in
               <FaUpload className="mx-auto text-gray-400 h-6 w-6 mb-1" />
               <p className="text-sm text-gray-600">Seret & lepas gambar di sini</p>
             </div>
-            {filePreview && <img src={filePreview} alt="Preview" className="mt-2 h-24 w-auto rounded mx-auto"/>}
+            {filePreview && (
+              <Image 
+                src={filePreview} 
+                alt="Preview" 
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="mt-2 h-24 w-auto rounded mx-auto"
+              />
+            )}
           </div>
           
           <div className="flex justify-end gap-4 pt-4 border-t mt-6">

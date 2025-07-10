@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="container mx-auto px-6 text-center">
           <p>&copy; {new Date().getFullYear()} KKN-PPM UGM SEMIN. All rights reserved.</p>
           <p className="text-sm text-gray-400 mt-2">
-            Website ini didedikasikan untuk mendukung UMKM di Kelurahan Sumberejo, Semin.
+            Website ini didedikasikan untuk mendukung UMKM di Kalurahan Sumberejo, Semin.
           </p>
           {/* --- TAUTAN LOGIN ADMIN DI SINI --- */}
           <div className="mt-4">

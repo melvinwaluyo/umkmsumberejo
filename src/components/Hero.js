@@ -11,7 +11,7 @@ const Hero = () => {
           Selamat Datang di Portal UMKM Sumberejo
         </h1>
         <p className="mt-4 text-lg md:text-xl text-white">
-          Temukan Potensi dan Produk Unggulan dari Kelurahan Sumberejo, Semin, Gunungkidul.
+          Temukan Potensi dan Produk Unggulan dari Kalurahan Sumberejo, Semin, Gunungkidul.
         </p>
         <div className="mt-8">
           <a

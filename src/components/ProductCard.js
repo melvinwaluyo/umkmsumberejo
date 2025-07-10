@@ -1,10 +1,12 @@
+import Image from "next/image";
 const ProductCard = ({ product }) => {
     return (
       <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
         <div className="relative w-full h-52">
-          <img 
+          <Image 
             src={product.imageUrl} 
             alt={`Gambar produk ${product.name}`}
+            fill
             className="w-full h-full object-cover"
           />
         </div>

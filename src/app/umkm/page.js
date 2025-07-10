@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 // 1. Impor hooks yang diperlukan untuk navigasi dan parameter URL
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import UmkmCard from '@/components/UmkmCard';
@@ -122,7 +122,27 @@ function JelajahUmkmComponent() {
   );
 }
 
+// Loading fallback component
+function LoadingFallback() {
+  return (
+    <div className="bg-amber-50 min-h-screen">
+      <div className="container mx-auto px-6 py-12">
+        <div className="text-center">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4"></div>
+            <div className="h-4 bg-gray-300 rounded w-96 mx-auto"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Wrapper untuk memastikan hooks bisa digunakan (best practice)
 export default function JelajahUmkmPage() {
-    return <JelajahUmkmComponent />;
+    return (
+      <Suspense fallback={<LoadingFallback />}>
+        <JelajahUmkmComponent />
+      </Suspense>
+    );
 }

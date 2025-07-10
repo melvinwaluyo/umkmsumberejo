@@ -1,6 +1,6 @@
 # Website UMKM Sumberejo
 
-Selamat datang di repositori proyek Website UMKM Sumberejo. Proyek ini bertujuan untuk membuat portal digital yang menampilkan dan mempromosikan Usaha Mikro, Kecil, dan Menengah (UMKM) yang ada di Kelurahan Sumberejo, Semin, Gunungkidul.
+Selamat datang di repositori proyek Website UMKM Sumberejo. Proyek ini bertujuan untuk membuat portal digital yang menampilkan dan mempromosikan Usaha Mikro, Kecil, dan Menengah (UMKM) yang ada di Kalurahan Sumberejo, Semin, Gunungkidul.
 
 Website ini berfungsi sebagai etalase digital, menyediakan pemetaan lokasi, katalog produk, dan artikel yang relevan untuk meningkatkan visibilitas dan jangkauan pasar bagi para pelaku usaha lokal.
 

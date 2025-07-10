@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import useDebounce from '@/hooks/useDebounce'; // Pastikan hook ini ada
 import ArticleCard from '@/components/ArticleCard';
 import { FaSearch } from 'react-icons/fa';
 
-export default function ArtikelPage() {
+function ArtikelPageComponent() {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -53,7 +53,7 @@ export default function ArtikelPage() {
             <div className="container mx-auto px-6 py-12">
                 <div className="text-center mb-8">
                     <h1 className="text-4xl font-bold text-gray-800">Artikel & Berita</h1>
-                    <p className="text-gray-600 mt-2">Wawasan terbaru seputar UMKM di Kelurahan Sumberejo.</p>
+                    <p className="text-gray-600 mt-2">Wawasan terbaru seputar UMKM di Kalurahan Sumberejo.</p>
                 </div>
 
                 {/* --- Search Box --- */}
@@ -88,5 +88,31 @@ export default function ArtikelPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+// Loading fallback component
+function ArtikelLoadingFallback() {
+    return (
+        <div className="bg-amber-50 min-h-screen">
+            <div className="container mx-auto px-6 py-12">
+                <div className="text-center">
+                    <div className="animate-pulse">
+                        <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-96 mx-auto mb-8"></div>
+                        <div className="h-12 bg-gray-300 rounded w-full max-w-2xl mx-auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+// Main component with Suspense wrapper
+export default function ArtikelPage() {
+    return (
+        <Suspense fallback={<ArtikelLoadingFallback />}>
+            <ArtikelPageComponent />
+        </Suspense>
     );
 }

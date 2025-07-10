@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function AdminLoginPage() {
+function AdminLoginComponent() {
   const router = useRouter();
   const { status } = useSession(); // Hanya butuh status sesi
   const searchParams = useSearchParams();
@@ -102,4 +102,29 @@ export default function AdminLoginPage() {
   // Jika status 'loading' atau 'authenticated', jangan render apa-apa (blank page)
   // karena useEffect akan menangani proses redirect.
   return null;
+}
+
+// Loading fallback component
+function LoginLoadingFallback() {
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-amber-50">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <div className="text-center">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-300 rounded w-48 mx-auto mb-4"></div>
+            <div className="h-4 bg-gray-300 rounded w-64 mx-auto"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Main component with Suspense wrapper
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={<LoginLoadingFallback />}>
+      <AdminLoginComponent />
+    </Suspense>
+  );
 }

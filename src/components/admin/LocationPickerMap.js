@@ -12,7 +12,7 @@ function InteractiveMap({ onLocationSelect, externalLat, externalLng }) {
     // State internal untuk posisi marker, dimulai dari null
     const [markerPos, setMarkerPos] = useState(null);
 
-    // useEffect ini HANYA bereaksi terhadap perubahan dari input manual (props)
+    // useEffect ini bereaksi terhadap perubahan dari input manual (props)
     useEffect(() => {
         // Jika ada koordinat dari luar (form) dan map sudah siap
         if (externalLat && externalLng && map) {
@@ -20,17 +20,9 @@ function InteractiveMap({ onLocationSelect, externalLat, externalLng }) {
             setMarkerPos(newPos); // Set posisi pin
             map.panTo(newPos);   // Pindahkan tampilan peta ke lokasi pin
         }
-    }, [externalLat, externalLng, map]); // <-- Hapus 'markerPos' dari dependency
+    }, [externalLat, externalLng, map]);
 
-    // Efek ini HANYA berjalan sekali saat peta pertama kali dimuat
-    useEffect(() => {
-        if (map && externalLat && externalLng) {
-             // Langsung pusatkan peta ke lokasi awal saat mode edit
-            map.panTo({ lat: parseFloat(externalLat), lng: parseFloat(externalLng) });
-        }
-    }, [map]); // <-- Hanya bergantung pada map
-
-    // Handler saat peta diklik (ini sekarang tidak akan terganggu oleh useEffect)
+    // Handler saat peta diklik
     const handleMapClick = (event) => {
         const lat = event.detail.latLng.lat;
         const lng = event.detail.latLng.lng;
