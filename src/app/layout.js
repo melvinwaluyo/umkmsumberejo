@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AuthProvider from "@/components/AuthProvider";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const cardo = Cardo({
   variable: "--font-cardo",
@@ -32,6 +34,8 @@ export default function RootLayout({ children }) {
           <main>{children}</main>
           <Footer />
         </AuthProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
