@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Website UMKM Sumberejo
 
-## Getting Started
+Selamat datang di repositori proyek Website UMKM Sumberejo. Proyek ini bertujuan untuk membuat portal digital yang menampilkan dan mempromosikan Usaha Mikro, Kecil, dan Menengah (UMKM) yang ada di Kelurahan Sumberejo, Semin, Gunungkidul.
 
-First, run the development server:
+Website ini berfungsi sebagai etalase digital, menyediakan pemetaan lokasi, katalog produk, dan artikel yang relevan untuk meningkatkan visibilitas dan jangkauan pasar bagi para pelaku usaha lokal.
+
+## Fitur Utama
+
+- **Pemetaan UMKM**: Peta interaktif yang menunjukkan lokasi setiap UMKM untuk memudahkan pencarian geografis.
+
+- **Profil Detail UMKM**: Setiap UMKM memiliki halaman profil sendiri yang menampilkan deskripsi, informasi kontak, galeri produk, dan tautan media sosial.
+
+- **Katalog Produk**: Pengunjung dapat menjelajahi produk-produk yang ditawarkan oleh setiap UMKM.
+
+- **Pencarian & Filter**: Pengguna dapat dengan mudah mencari UMKM berdasarkan nama atau memfilternya berdasarkan kategori (contoh: Kuliner, Kerajinan).
+
+- **Sistem Artikel**: Halaman artikel yang dikelola melalui Sanity CMS untuk membagikan berita, tips, atau wawasan seputar dunia UMKM.
+
+- **Dashboard Admin**: Panel administrasi yang dilindungi dengan sistem login untuk mengelola data UMKM, produk, dan konten lainnya (CRUD).
+
+## Teknologi yang Digunakan
+
+Proyek ini dibangun menggunakan tumpukan teknologi modern yang berfokus pada performa dan pengalaman pengembang.
+
+- **Framework**: Next.js (React Framework)
+- **Styling**: Tailwind CSS
+- **Database**: MongoDB dengan Prisma sebagai ORM
+- **Autentikasi**: NextAuth.js
+- **Manajemen Konten (CMS)**: Sanity.io untuk halaman artikel
+- **Peta**: Google Maps Platform dengan @vis.gl/react-google-maps
+- **Upload Gambar**: Cloudinary
+- **Deployment**: Vercel
+
+## Cara Menjalankan Proyek Secara Lokal
+
+Untuk menjalankan proyek ini di lingkungan lokal Anda, ikuti langkah-langkah berikut:
+
+### 1. Kloning Repositori
+
+```bash
+git clone https://github.com/melvinwaluyo/umkmsumberejo.git
+cd umkmsumberejo
+```
+
+### 2. Instalasi Dependensi
+
+```bash
+npm install
+```
+
+### 3. Konfigurasi Environment Variables
+
+Buat file baru bernama `.env` di direktori root proyek dan isi dengan kredensial yang diperlukan. Salin contoh dari `.env.example`, atau isi dengan format berikut:
+
+```env
+# MongoDB
+DATABASE_URL="mongodb+srv://..."
+
+# NextAuth
+NEXTAUTH_SECRET="your-super-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+
+# Google Maps API
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your-google-maps-api-key"
+
+# Cloudinary
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
+NEXT_PUBLIC_CLOUDINARY_API_KEY="your-api-key"
+CLOUDINARY_API_SECRET="your-api-secret"
+
+# Sanity CMS
+NEXT_PUBLIC_SANITY_PROJECT_ID="your-sanity-project-id"
+NEXT_PUBLIC_SANITY_STUDIO_URL="https://your-project.sanity.studio/"
+
+# Google Form
+NEXT_PUBLIC_GOOGLE_FORM_URL="your-google-form-link"
+```
+
+### 4. Sinkronisasi Database Prisma
+
+Jalankan perintah berikut untuk memastikan klien Prisma Anda sinkron dengan skema:
+
+```bash
+npx prisma generate
+```
+
+### 5. Jalankan Server Pengembangan
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000) di browser Anda untuk melihat hasilnya.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Sanity Studio (CMS)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Proyek ini menggunakan Sanity untuk manajemen konten artikel. Studio (CMS) berada di dalam sub-folder `sanity-studio`. Untuk menjalankannya:
 
-## Learn More
+1. Masuk ke direktori studio:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   cd sanity-studio
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Instal dependensi:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. Jalankan studio secara lokal:
+   ```bash
+   sanity start
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Studio akan berjalan di [http://localhost:3333](http://localhost:3333).
