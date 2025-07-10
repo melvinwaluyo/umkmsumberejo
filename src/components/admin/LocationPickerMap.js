@@ -7,7 +7,7 @@ import PlacesAutocomplete from './PlacesAutocomplete';
 // Komponen peta utama
 function InteractiveMap({ onLocationSelect, externalLat, externalLng }) {
     const map = useMap();
-    const defaultPosition = { lat: -7.9254, lng: 110.6534 };
+    const defaultPosition = { lat: -7.843752, lng: 110.733106 };
 
     // State internal untuk posisi marker, dimulai dari null
     const [markerPos, setMarkerPos] = useState(null);
