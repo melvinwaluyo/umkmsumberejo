@@ -56,6 +56,9 @@ Buat file baru bernama `.env` di direktori root proyek dan isi dengan kredensial
 # MongoDB
 DATABASE_URL="mongodb+srv://..."
 
+# API Configuration
+NEXT_PUBLIC_API_URL="https://your-domain.com"
+
 # NextAuth
 NEXTAUTH_SECRET="your-super-secret-key"
 
