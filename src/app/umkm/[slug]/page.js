@@ -51,12 +51,12 @@ export default function UmkmDetailPage({ params }) {
 
   // Tampilan saat loading
   if (loading) {
-    return <div className="flex justify-center items-center min-h-screen bg-amber-50">Memuat data...</div>;
+    return <div className="flex justify-center items-center min-h-screen bg-amber-50 text-gray-500">Memuat data...</div>;
   }
 
   // Tampilan jika terjadi error atau data tidak ditemukan
   if (error || !umkm) {
-    return <div className="flex justify-center items-center min-h-screen bg-amber-50">Gagal memuat data atau UMKM tidak ditemukan.</div>;
+    return <div className="flex justify-center items-center min-h-screen bg-amber-50 text-gray-500">Gagal memuat data atau UMKM tidak ditemukan.</div>;
   }
 
   // Definisikan jejak breadcrumb setelah data UMKM berhasil dimuat
