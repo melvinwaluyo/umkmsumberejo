@@ -15,7 +15,7 @@ export default function RegisterCta() {
       {/* Gambar-gambar ini dijadikan dekoratif dan disembunyikan di layar kecil */}
       <Image 
         src="/Register-topleft.png" 
-        alt="" 
+        alt="register-topleft" 
         width={350} 
         height={350} 
         aria-hidden="true"
@@ -23,7 +23,7 @@ export default function RegisterCta() {
       />
       <Image 
         src="/Register-topright.png" 
-        alt="" 
+        alt="register-topright" 
         width={350} 
         height={350} 
         aria-hidden="true"
@@ -31,7 +31,7 @@ export default function RegisterCta() {
       />
       <Image 
         src="/Register-bottomleft.png" 
-        alt="" 
+        alt="register-bottomleft" 
         width={300} 
         height={300} 
         aria-hidden="true"
@@ -39,7 +39,7 @@ export default function RegisterCta() {
       />
       <Image 
         src="/Register-bottomright.png" 
-        alt="" 
+        alt="register-bottomright" 
         width={300} 
         height={300} 
         aria-hidden="true"
