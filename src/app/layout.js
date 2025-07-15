@@ -14,7 +14,7 @@ const cardo = Cardo({
 });
 
 export const metadata = {
-  title: "UMKM Sumberejo - Portal Digital UMKM Kalurahan Sumberejo, Semin, Gunungkidul",
+  title: "UMKM Sumberejo - Portal Digital UMKM Kalurahan Sumberejo",
   description: "Website pemetaan dan katalog produk UMKM Kalurahan Sumberejo, Semin, Gunungkidul",
   manifest: "/manifest.webmanifest",
   icons: {
