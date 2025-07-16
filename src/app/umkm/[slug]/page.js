@@ -111,7 +111,7 @@ export default function UmkmDetailPage({ params }) {
                 <h3 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-3 flex items-center gap-3">
                   <FaInfoCircle className="text-green-500" /> Tentang Kami
                 </h3>
-                <p className="text-gray-600 mb-6">{umkm.description}</p>
+                <p className="text-gray-600 mb-6 whitespace-pre-line">{umkm.description}</p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <FaMapMarkerAlt className="text-gray-500 mt-1 w-5 h-5 flex-shrink-0" />

@@ -123,7 +123,7 @@ export default function ManageUmkmClient({ initialUmkm }) {
                 <div className="bg-white p-6 rounded-lg shadow-md mb-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-4">Detail UMKM</h2>
                     {/* Deskripsi UMKM */}
-                    <p className="text-gray-700 mb-6">{umkm.description}</p>
+                    <p className="text-gray-700 mb-6 whitespace-pre-line">{umkm.description}</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 border-t pt-4">
                         <div><strong>Alamat:</strong> {umkm.address}</div>
                         <div><strong>WhatsApp:</strong> <a href={`https://wa.me/${umkm.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline">{umkm.whatsapp}</a></div>
@@ -180,7 +180,7 @@ export default function ManageUmkmClient({ initialUmkm }) {
                                                 </div>
                                                 <div className="ml-4">
                                                     <div className="text-sm font-medium text-gray-900">{product.name}</div>
-                                                    <div className="text-sm text-gray-500">{product.description}</div>
+                                                    <div className="text-sm text-gray-500 whitespace-pre-line">{product.description}</div>
                                                 </div>
                                             </div>
                                         </td>

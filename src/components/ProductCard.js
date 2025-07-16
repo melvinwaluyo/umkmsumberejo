@@ -22,7 +22,7 @@ const ProductCard = ({ product, onImageClick }) => {
           {product.price && (
             <p className="text-green-700 font-bold mt-1">{product.price}</p>
           )}
-          <p className="text-gray-600 mt-2 text-sm flex-grow">
+          <p className="text-gray-600 mt-2 text-sm flex-grow whitespace-pre-line">
             {product.description}
           </p>
         </div>
