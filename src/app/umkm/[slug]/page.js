@@ -62,7 +62,7 @@ export default function UmkmDetailPage({ params }) {
   // Definisikan jejak breadcrumb setelah data UMKM berhasil dimuat
   const breadcrumbCrumbs = [
     { href: '/', label: 'Home' },
-    { href: '/umkm', label: 'Jelajahi UMKM' },
+    { href: '/umkm', label: 'Jelajah UMKM' },
     { href: `/umkm/${umkm.slug}`, label: umkm.name }
   ];
 
