@@ -1,7 +1,9 @@
 import db from '@/lib/db'; 
 import { client } from '@/lib/sanityClient'; 
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600; 
+export const dynamicParams = true;
 
 export default async function sitemap() {
   // URL dasar website
