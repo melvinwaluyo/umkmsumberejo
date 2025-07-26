@@ -1,8 +1,10 @@
-import db from '@/lib/db'; // Klien Prisma Anda
-import { client } from '@/lib/sanityClient'; // Klien Sanity Anda
+import db from '@/lib/db'; 
+import { client } from '@/lib/sanityClient'; 
+
+export const revalidate = 3600; 
 
 export default async function sitemap() {
-  // URL dasar website Anda
+  // URL dasar website
   const baseUrl = "https://www.umkm-sumberejo.com"; 
 
   // 1. Ambil semua slug UMKM dari database
