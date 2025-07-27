@@ -3,10 +3,8 @@ import ArticleCard from './ArticleCard';
 
 /**
  * Mengambil 3 artikel terbaru dari Sanity.
- * Ini adalah Server Component, jadi kita bisa fetch data langsung.
  */
 async function getFeaturedPosts() {
-  // Query untuk mengambil 3 artikel teratas, diurutkan berdasarkan tanggal publikasi
   const query = `*[_type == "post"] | order(publishedAt desc) [0...3] {
     _id,
     title,
@@ -17,11 +15,14 @@ async function getFeaturedPosts() {
     publishedAt,
   }`;
   try {
-    const posts = await client.fetch(query);
+    const posts = await client.fetch(query, {}, {
+      cache: 'no-store'
+    });
     return posts;
-  } catch (error) {
+  } catch (error)
+ {
     console.error("Gagal mengambil artikel unggulan:", error);
-    return []; // Kembalikan array kosong jika gagal
+    return [];
   }
 }
 
@@ -29,7 +30,7 @@ export default async function FeaturedArticles() {
   const featuredPosts = await getFeaturedPosts();
 
   return (
-    <section className="py-20 bg-amber-50">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
           Artikel & Wawasan Terbaru
@@ -40,7 +41,6 @@ export default async function FeaturedArticles() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredPosts && featuredPosts.length > 0 ? (
-            // Gunakan kembali komponen ArticleCard untuk konsistensi
             featuredPosts.map((post) => (
               <ArticleCard key={post._id} post={post} />
             ))
