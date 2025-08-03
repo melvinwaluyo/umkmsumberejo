@@ -37,7 +37,7 @@ export default function PemetaanPage() {
 
     return (
         <div className="w-full h-screen relative pt-16">
-            <div className="absolute top-0 left-0 w-full h-16 bg-white z-10 flex items-center shadow-md">
+            <div className="absolute top-0 left-0 w-full h-16 bg-amber-50 z-10 flex items-center shadow-md">
                 <div className="container mx-auto px-6">
                     <h1 className="text-2xl font-bold text-gray-800">Peta Sebaran UMKM</h1>
                     <p className="text-gray-500 text-sm">Klik penanda untuk melihat detail UMKM</p>
